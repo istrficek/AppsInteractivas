@@ -1,11 +1,11 @@
 import { Icon } from '@iconify/react';
 import pieChart2Fill from '@iconify/icons-eva/pie-chart-2-fill';
-import peopleFill from '@iconify/icons-eva/people-fill';
-import shoppingBagFill from '@iconify/icons-eva/shopping-bag-fill';
+import vaccine from '@iconify/icons-ic/outline-vaccines';
 import fileTextFill from '@iconify/icons-eva/file-text-fill';
-import lockFill from '@iconify/icons-eva/lock-fill';
-import personAddFill from '@iconify/icons-eva/person-add-fill';
-import alertTriangleFill from '@iconify/icons-eva/alert-triangle-fill';
+import baby from '@iconify/icons-healthicons/baby-0203m';
+import meds from '@iconify/icons-healthicons/medicines';
+import settings from '@iconify/icons-eva/settings-2-fill';
+import doctorIcon from '@iconify/icons-healthicons/doctor';
 
 // ----------------------------------------------------------------------
 
@@ -18,34 +18,39 @@ const sidebarConfig = [
     icon: getIcon(pieChart2Fill)
   },
   {
-    title: 'user',
-    path: '/dashboard/user',
-    icon: getIcon(peopleFill)
-  },
-  {
-    title: 'product',
+    title: 'Roberto',
     path: '/dashboard/products',
-    icon: getIcon(shoppingBagFill)
+    icon: getIcon(baby)
   },
   {
-    title: 'blog',
+    title: 'Camelia',
+    path: '/dashboard/blog',
+    icon: getIcon(baby)
+  },
+  {
+    title: 'controles',
+    path: '/dashboard/user',
+    icon: getIcon(doctorIcon)
+  },
+  {
+    title: 'estudios',
     path: '/dashboard/blog',
     icon: getIcon(fileTextFill)
   },
   {
-    title: 'login',
-    path: '/login',
-    icon: getIcon(lockFill)
+    title: 'vacunas',
+    path: '/dashboard/blog',
+    icon: getIcon(vaccine)
   },
   {
-    title: 'register',
-    path: '/register',
-    icon: getIcon(personAddFill)
+    title: 'medicamentos',
+    path: '/dashboard/blog',
+    icon: getIcon(meds)
   },
   {
-    title: 'Not found',
-    path: '/404',
-    icon: getIcon(alertTriangleFill)
+    title: 'configuración',
+    path: '/dashboard/blog',
+    icon: getIcon(settings)
   }
 ];
 

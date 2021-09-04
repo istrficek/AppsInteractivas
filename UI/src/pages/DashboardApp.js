@@ -1,14 +1,15 @@
+// icons
+import vaccine from '@iconify/icons-ic/outline-vaccines';
+import fileTextFill from '@iconify/icons-eva/file-text-fill';
+import doctorIcon from '@iconify/icons-healthicons/doctor';
 // material
-import { Box, Grid, Container, Typography } from '@material-ui/core';
+import { Box, Grid, Container, Typography, Divider } from '@material-ui/core';
 // components
 import Page from '../components/Page';
 import {
   AppTasks,
-  AppNewUsers,
-  AppBugReports,
-  AppItemOrders,
   AppNewsUpdate,
-  AppWeeklySales,
+  AppNextAppointment,
   AppOrderTimeline,
   AppCurrentVisits,
   AppWebsiteVisits,
@@ -23,22 +24,19 @@ export default function DashboardApp() {
   return (
     <Page title="Dashboard | Minimal-UI">
       <Container maxWidth="xl">
-        <Box sx={{ pb: 5 }}>
+        {/* <Box sx={{ pb: 5 }}>
           <Typography variant="h4">Hi, Welcome back</Typography>
-        </Box>
-        <Grid container spacing={3}>
-          <Grid item xs={12} sm={6} md={3}>
-            <AppWeeklySales />
+        </Box> */}
+        <Grid container spacing={6}>
+          <Grid item xs={12} sm={6} md={4}>
+            <AppNextAppointment text={'Próximo Control'} date={ {day:24, month:'Agosto'}} icon={doctorIcon} />
           </Grid>
-          <Grid item xs={12} sm={6} md={3}>
-            <AppNewUsers />
+          <Grid item xs={12} sm={6} md={4}>
+            <AppNextAppointment text={'Próximo Estudio'} date={ {day:30, month:'Septiembre'} } icon={fileTextFill} />
           </Grid>
-          <Grid item xs={12} sm={6} md={3}>
-            <AppItemOrders />
-          </Grid>
-          <Grid item xs={12} sm={6} md={3}>
-            <AppBugReports />
-          </Grid>
+          <Grid item xs={12} sm={6} md={4}>
+            <AppNextAppointment text={'Próxima Vacuna'} date={ {day:10, month:'Noviembre'} } icon={vaccine} />
+          </Grid>         
 
           <Grid item xs={12} md={6} lg={8}>
             <AppWebsiteVisits />

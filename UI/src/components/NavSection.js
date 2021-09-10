@@ -91,9 +91,9 @@ function NavItem({ item, active }) {
         </ListItemStyle>
 
         <Collapse in={open} timeout="auto" unmountOnExit>
-          <List component="div" disablePadding>
+          <List sx={{ backgroundColor:'#eee', paddingLeft:'30px' }} component="div" disablePadding>
             {children.map((item) => {
-              const { title, path } = item;
+              const { title, path, icon } = item;
               const isActiveSub = active(path);
 
               return (
@@ -105,25 +105,7 @@ function NavItem({ item, active }) {
                     ...(isActiveSub && activeSubStyle)
                   }}
                 >
-                  <ListItemIconStyle>
-                    <Box
-                      component="span"
-                      sx={{
-                        width: 4,
-                        height: 4,
-                        display: 'flex',
-                        borderRadius: '50%',
-                        alignItems: 'center',
-                        justifyContent: 'center',
-                        bgcolor: 'text.disabled',
-                        transition: (theme) => theme.transitions.create('transform'),
-                        ...(isActiveSub && {
-                          transform: 'scale(2)',
-                          bgcolor: 'primary.main'
-                        })
-                      }}
-                    />
-                  </ListItemIconStyle>
+                  <ListItemIconStyle>{icon && icon}</ListItemIconStyle>
                   <ListItemText disableTypography primary={title} />
                 </ListItemStyle>
               );

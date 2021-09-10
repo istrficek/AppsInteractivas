@@ -20,37 +20,52 @@ const sidebarConfig = [
   {
     title: 'Roberto',
     path: '/dashboard/products',
-    icon: getIcon(baby)
+    icon: getIcon(baby),
+    children: [{
+      title: 'controles',
+      path: '/dashboard/user',
+      icon: getIcon(doctorIcon)
+    },
+    {
+      title: 'estudios',
+      path: '/dashboard/blog',
+      icon: getIcon(fileTextFill)
+    },
+    {
+      title: 'vacunas',
+      path: '/dashboard/blog',
+      icon: getIcon(vaccine)
+    },
+    {
+      title: 'medicamentos',
+      path: '/dashboard/blog',
+      icon: getIcon(meds)
+    }]
   },
   {
     title: 'Camelia',
     path: '/dashboard/blog',
-    icon: getIcon(baby)
-  },
-  {
-    title: 'controles',
-    path: '/dashboard/user',
-    icon: getIcon(doctorIcon)
-  },
-  {
-    title: 'estudios',
-    path: '/dashboard/blog',
-    icon: getIcon(fileTextFill)
-  },
-  {
-    title: 'vacunas',
-    path: '/dashboard/blog',
-    icon: getIcon(vaccine)
-  },
-  {
-    title: 'medicamentos',
-    path: '/dashboard/blog',
-    icon: getIcon(meds)
-  },
-  {
-    title: 'configuración',
-    path: '/dashboard/blog',
-    icon: getIcon(settings)
+    icon: getIcon(baby),
+    children: [{
+      title: 'controles',
+      path: '/dashboard/user',
+      icon: getIcon(doctorIcon)
+    },
+    {
+      title: 'estudios',
+      path: '/dashboard/blog',
+      icon: getIcon(fileTextFill)
+    },
+    {
+      title: 'vacunas',
+      path: '/dashboard/blog',
+      icon: getIcon(vaccine)
+    },
+    {
+      title: 'medicamentos',
+      path: '/dashboard/blog',
+      icon: getIcon(meds)
+    }]
   }
 ];
 

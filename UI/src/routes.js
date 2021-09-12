@@ -24,7 +24,8 @@ export default function Router() {
         { path: 'dashboard', element: <DashboardApp /> },
         { path: 'user', element: <User /> },
         { path: 'products', element: <Products /> },
-        { path: 'blog', element: <Blog /> }
+        { path: 'blog', element: <Blog /> },
+        { path: '*', element: <Navigate to="/404" replace /> }
       ]
     },
     {

@@ -17,24 +17,28 @@ export default function RegisterForm() {
 
   const RegisterSchema = Yup.object().shape({
     firstName: Yup.string()
-      .min(2, 'Too Short!')
-      .max(50, 'Too Long!')
-      .required('First name required'),
-    lastName: Yup.string().min(2, 'Too Short!').max(50, 'Too Long!').required('Last name required'),
-    email: Yup.string().email('Email must be a valid email address').required('Email is required'),
-    password: Yup.string().required('Password is required')
+      .min(2, 'Muy Corto!')
+      .max(50, 'Muy Largo!')
+      .required('Nombre Requerido'),
+    lastName: Yup.string().min(2, 'Muy Corto!').max(50, 'Muy Largo!').required('Apellido Requerido'),
+    dni: Yup.number().typeError('El DNI debe ser un número').min(1000000,'El DNI debe ser mayor a 1.000.000').max(99999999, 'El DNI debe ser menor a 99.999.999').required('DNI Requerido'),
+    email: Yup.string().email('El email tiene que ser válido').required('Email Requerido'),
+    phone: Yup.number().typeError('Ingrese el numero sin espacios ni signos').min(1100000000, 'El numero debe ser de la forma 11 + num').max(1199999999, 'El numero debe ser de la forma 11 + num').required('Telefono Requerido'),
+    password: Yup.string().required('Contraseña Requerida')
   });
 
   const formik = useFormik({
     initialValues: {
       firstName: '',
       lastName: '',
+      dni: '',
+      phone: '',
       email: '',
       password: ''
     },
     validationSchema: RegisterSchema,
     onSubmit: () => {
-      navigate('/dashboard', { replace: true });
+      navigate('/main', { replace: true });
     }
   });
 
@@ -47,7 +51,7 @@ export default function RegisterForm() {
           <Stack direction={{ xs: 'column', sm: 'row' }} spacing={2}>
             <TextField
               fullWidth
-              label="First name"
+              label="Nombre"
               {...getFieldProps('firstName')}
               error={Boolean(touched.firstName && errors.firstName)}
               helperText={touched.firstName && errors.firstName}
@@ -55,7 +59,7 @@ export default function RegisterForm() {
 
             <TextField
               fullWidth
-              label="Last name"
+              label="Apellido"
               {...getFieldProps('lastName')}
               error={Boolean(touched.lastName && errors.lastName)}
               helperText={touched.lastName && errors.lastName}
@@ -64,9 +68,27 @@ export default function RegisterForm() {
 
           <TextField
             fullWidth
+            autoComplete="dni"
+            label="DNI"
+            {...getFieldProps('dni')}
+            error={Boolean(touched.dni && errors.dni)}
+            helperText={touched.dni && errors.dni}
+          />
+
+          <TextField
+            fullWidth
+            autoComplete="phone"
+            label="Telefono"
+            {...getFieldProps('phone')}
+            error={Boolean(touched.phone && errors.phone)}
+            helperText={touched.phone && errors.phone}
+          />
+
+          <TextField
+            fullWidth
             autoComplete="username"
             type="email"
-            label="Email address"
+            label="Email"
             {...getFieldProps('email')}
             error={Boolean(touched.email && errors.email)}
             helperText={touched.email && errors.email}
@@ -76,7 +98,7 @@ export default function RegisterForm() {
             fullWidth
             autoComplete="current-password"
             type={showPassword ? 'text' : 'password'}
-            label="Password"
+            label="Contraseña"
             {...getFieldProps('password')}
             InputProps={{
               endAdornment: (
@@ -98,7 +120,7 @@ export default function RegisterForm() {
             variant="contained"
             loading={isSubmitting}
           >
-            Register
+            Registrarse
           </LoadingButton>
         </Stack>
       </Form>

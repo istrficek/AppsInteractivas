@@ -24,8 +24,8 @@ export default function LoginForm() {
   const [showPassword, setShowPassword] = useState(false);
 
   const LoginSchema = Yup.object().shape({
-    email: Yup.string().email('Email must be a valid email address').required('Email is required'),
-    password: Yup.string().required('Password is required')
+    email: Yup.string().email('El email tiene que ser válido').required('Email requerido'),
+    password: Yup.string().required('Contraseña requerida')
   });
 
   const formik = useFormik({
@@ -36,7 +36,7 @@ export default function LoginForm() {
     },
     validationSchema: LoginSchema,
     onSubmit: () => {
-      navigate('/dashboard', { replace: true });
+      navigate('/main', { replace: true });
     }
   });
 
@@ -54,7 +54,7 @@ export default function LoginForm() {
             fullWidth
             autoComplete="username"
             type="email"
-            label="Email address"
+            label="Email"
             {...getFieldProps('email')}
             error={Boolean(touched.email && errors.email)}
             helperText={touched.email && errors.email}
@@ -64,7 +64,7 @@ export default function LoginForm() {
             fullWidth
             autoComplete="current-password"
             type={showPassword ? 'text' : 'password'}
-            label="Password"
+            label="Contraseña"
             {...getFieldProps('password')}
             InputProps={{
               endAdornment: (
@@ -83,11 +83,11 @@ export default function LoginForm() {
         <Stack direction="row" alignItems="center" justifyContent="space-between" sx={{ my: 2 }}>
           <FormControlLabel
             control={<Checkbox {...getFieldProps('remember')} checked={values.remember} />}
-            label="Remember me"
+            label="Recordar"
           />
 
           <Link component={RouterLink} variant="subtitle2" to="#">
-            Forgot password?
+            Te olvidaste la contraseña?
           </Link>
         </Stack>
 
@@ -98,7 +98,7 @@ export default function LoginForm() {
           variant="contained"
           loading={isSubmitting}
         >
-          Login
+          Ingresar
         </LoadingButton>
       </Form>
     </FormikProvider>

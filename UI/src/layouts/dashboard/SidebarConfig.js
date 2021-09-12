@@ -14,56 +14,56 @@ const getIcon = (name) => <Icon icon={name} width={22} height={22} />;
 const sidebarConfig = [
   {
     title: 'dashboard',
-    path: '/dashboard/app',
+    path: '/main/dashboard',
     icon: getIcon(pieChart2Fill)
   },
   {
     title: 'Roberto',
-    path: '/dashboard/products',
+    path: '/main/products',
     icon: getIcon(baby),
     children: [{
       title: 'controles',
-      path: '/dashboard/user',
+      path: '/main/user',
       icon: getIcon(doctorIcon)
     },
     {
       title: 'estudios',
-      path: '/dashboard/blog',
+      path: '/main/blog',
       icon: getIcon(fileTextFill)
     },
     {
       title: 'vacunas',
-      path: '/dashboard/blog',
+      path: '/main/blog',
       icon: getIcon(vaccine)
     },
     {
       title: 'medicamentos',
-      path: '/dashboard/blog',
+      path: '/main/blog',
       icon: getIcon(meds)
     }]
   },
   {
     title: 'Camelia',
-    path: '/dashboard/blog',
+    path: '/main/blog',
     icon: getIcon(baby),
     children: [{
       title: 'controles',
-      path: '/dashboard/user',
+      path: '/main/user',
       icon: getIcon(doctorIcon)
     },
     {
       title: 'estudios',
-      path: '/dashboard/blog',
+      path: '/main/blog',
       icon: getIcon(fileTextFill)
     },
     {
       title: 'vacunas',
-      path: '/dashboard/blog',
+      path: '/main/blog',
       icon: getIcon(vaccine)
     },
     {
       title: 'medicamentos',
-      path: '/dashboard/blog',
+      path: '/main/blog',
       icon: getIcon(meds)
     }]
   }

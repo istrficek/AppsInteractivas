@@ -13,6 +13,7 @@ const RootStyle = styled(Page)(({ theme }) => ({
   display: 'flex',
   minHeight: '100%',
   alignItems: 'center',
+  backgroundColor: '#00adf7',
   paddingTop: theme.spacing(15),
   paddingBottom: theme.spacing(10)
 }));
@@ -21,30 +22,30 @@ const RootStyle = styled(Page)(({ theme }) => ({
 
 export default function Page404() {
   return (
-    <RootStyle title="404 Page Not Found | Minimal-UI">
+    <RootStyle title="404 | Baby App">
       <Container>
         <MotionContainer initial="initial" open>
           <Box sx={{ maxWidth: 480, margin: 'auto', textAlign: 'center' }}>
             <motion.div variants={varBounceIn}>
               <Typography variant="h3" paragraph>
-                Sorry, page not found!
+                Pagina No Encontrada!
               </Typography>
             </motion.div>
-            <Typography sx={{ color: 'text.secondary' }}>
-              Sorry, we couldn’t find the page you’re looking for. Perhaps you’ve mistyped the URL?
-              Be sure to check your spelling.
+            <Typography sx={{ color: 'text.primary' }}>
+              Lo siento, No pudimos encontrar la página que buscas. Tal vez escribiste mal la URL?
+              Asegurate de chequear la ortografía.
             </Typography>
 
             <motion.div variants={varBounceIn}>
               <Box
                 component="img"
-                src="/static/illustrations/illustration_404.svg"
+                src="/static/illustrations/404-Crying-Baby-Page-transparent.png"
                 sx={{ height: 260, mx: 'auto', my: { xs: 5, sm: 10 } }}
               />
             </motion.div>
 
             <Button to="/" size="large" variant="contained" component={RouterLink}>
-              Go to Home
+              Volver
             </Button>
           </Box>
         </MotionContainer>

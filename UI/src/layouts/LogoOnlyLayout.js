@@ -23,11 +23,11 @@ const HeaderStyle = styled('header')(({ theme }) => ({
 export default function LogoOnlyLayout() {
   return (
     <>
-      <HeaderStyle>
+      {/* <HeaderStyle>
         <RouterLink to="/">
           <Logo />
         </RouterLink>
-      </HeaderStyle>
+      </HeaderStyle> */}
       <Outlet />
     </>
   );

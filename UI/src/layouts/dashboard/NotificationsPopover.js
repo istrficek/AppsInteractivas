@@ -8,6 +8,8 @@ import { Icon } from '@iconify/react';
 import bellFill from '@iconify/icons-eva/bell-fill';
 import clockFill from '@iconify/icons-eva/clock-fill';
 import doneAllFill from '@iconify/icons-eva/done-all-fill';
+import doctorIcon from '@iconify/icons-healthicons/doctor';
+import vaccine from '@iconify/icons-ic/outline-vaccines';
 // material
 import { alpha } from '@material-ui/core/styles';
 import {
@@ -36,49 +38,49 @@ import MenuPopover from '../../components/MenuPopover';
 const NOTIFICATIONS = [
   {
     id: faker.datatype.uuid(),
-    title: 'Your order is placed',
-    description: 'waiting for shipping',
+    title: 'Proximo Control',
+    description: 'El proximo control de Camelia es el 24 de Agosto',
     avatar: null,
-    type: 'order_placed',
+    type: 'control',
     createdAt: set(new Date(), { hours: 10, minutes: 30 }),
     isUnRead: true
   },
   {
     id: faker.datatype.uuid(),
-    title: faker.name.findName(),
-    description: 'answered to your comment on the Minimal',
-    avatar: mockImgAvatar(2),
-    type: 'friend_interactive',
+    title: 'Turno Vacunacion',
+    description: 'Roberto se tiene que vacunar el 10 de Noviembre',
+    avatar: null,
+    type: 'vaccine',
     createdAt: sub(new Date(), { hours: 3, minutes: 30 }),
     isUnRead: true
-  },
-  {
-    id: faker.datatype.uuid(),
-    title: 'You have new message',
-    description: '5 unread messages',
-    avatar: null,
-    type: 'chat_message',
-    createdAt: sub(new Date(), { days: 1, hours: 3, minutes: 30 }),
-    isUnRead: false
-  },
-  {
-    id: faker.datatype.uuid(),
-    title: 'You have new mail',
-    description: 'sent from Guido Padberg',
-    avatar: null,
-    type: 'mail',
-    createdAt: sub(new Date(), { days: 2, hours: 3, minutes: 30 }),
-    isUnRead: false
-  },
-  {
-    id: faker.datatype.uuid(),
-    title: 'Delivery processing',
-    description: 'Your order is being shipped',
-    avatar: null,
-    type: 'order_shipped',
-    createdAt: sub(new Date(), { days: 3, hours: 3, minutes: 30 }),
-    isUnRead: false
-  }
+  }//,
+  // {
+  //   id: faker.datatype.uuid(),
+  //   title: 'You have new message',
+  //   description: '5 unread messages',
+  //   avatar: null,
+  //   type: 'chat_message',
+  //   createdAt: sub(new Date(), { days: 1, hours: 3, minutes: 30 }),
+  //   isUnRead: false
+  // },
+  // {
+  //   id: faker.datatype.uuid(),
+  //   title: 'You have new mail',
+  //   description: 'sent from Guido Padberg',
+  //   avatar: null,
+  //   type: 'mail',
+  //   createdAt: sub(new Date(), { days: 2, hours: 3, minutes: 30 }),
+  //   isUnRead: false
+  // },
+  // {
+  //   id: faker.datatype.uuid(),
+  //   title: 'Delivery processing',
+  //   description: 'Your order is being shipped',
+  //   avatar: null,
+  //   type: 'order_shipped',
+  //   createdAt: sub(new Date(), { days: 3, hours: 3, minutes: 30 }),
+  //   isUnRead: false
+  // }
 ];
 
 function renderContent(notification) {
@@ -91,27 +93,15 @@ function renderContent(notification) {
     </Typography>
   );
 
-  if (notification.type === 'order_placed') {
+  if (notification.type === 'vaccine') {
     return {
-      avatar: <img alt={notification.title} src="/static/icons/ic_notification_package.svg" />,
+      avatar: <Box component={Icon} icon={vaccine} sx={{ color:'black' , width: 32, height: 32 }} />,
       title
     };
   }
-  if (notification.type === 'order_shipped') {
+  if (notification.type === 'control') {
     return {
-      avatar: <img alt={notification.title} src="/static/icons/ic_notification_shipping.svg" />,
-      title
-    };
-  }
-  if (notification.type === 'mail') {
-    return {
-      avatar: <img alt={notification.title} src="/static/icons/ic_notification_mail.svg" />,
-      title
-    };
-  }
-  if (notification.type === 'chat_message') {
-    return {
-      avatar: <img alt={notification.title} src="/static/icons/ic_notification_chat.svg" />,
+      avatar: <Box component={Icon} icon={doctorIcon} sx={{ color:'black' , width: 32, height: 32 }} />,
       title
     };
   }
@@ -215,14 +205,14 @@ export default function NotificationsPopover() {
       >
         <Box sx={{ display: 'flex', alignItems: 'center', py: 2, px: 2.5 }}>
           <Box sx={{ flexGrow: 1 }}>
-            <Typography variant="subtitle1">Notifications</Typography>
+            <Typography variant="subtitle1">Notificaciones</Typography>
             <Typography variant="body2" sx={{ color: 'text.secondary' }}>
-              You have {totalUnRead} unread messages
+              Tenes {totalUnRead} mensajes sin leer
             </Typography>
           </Box>
 
           {totalUnRead > 0 && (
-            <Tooltip title=" Mark all as read">
+            <Tooltip title=" Marcar Todo Como Leido">
               <IconButton color="primary" onClick={handleMarkAllAsRead}>
                 <Icon icon={doneAllFill} width={20} height={20} />
               </IconButton>
@@ -237,7 +227,7 @@ export default function NotificationsPopover() {
             disablePadding
             subheader={
               <ListSubheader disableSticky sx={{ py: 1, px: 2.5, typography: 'overline' }}>
-                New
+                Nuevos
               </ListSubheader>
             }
           >
@@ -246,25 +236,25 @@ export default function NotificationsPopover() {
             ))}
           </List>
 
-          <List
+          {/* <List
             disablePadding
             subheader={
               <ListSubheader disableSticky sx={{ py: 1, px: 2.5, typography: 'overline' }}>
-                Before that
+                Leidos
               </ListSubheader>
             }
           >
             {notifications.slice(2, 5).map((notification) => (
               <NotificationItem key={notification.id} notification={notification} />
             ))}
-          </List>
+          </List> */}
         </Scrollbar>
 
         <Divider />
 
         <Box sx={{ p: 1 }}>
           <Button fullWidth disableRipple component={RouterLink} to="#">
-            View All
+            Ver Todos
           </Button>
         </Box>
       </MenuPopover>

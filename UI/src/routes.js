@@ -10,17 +10,18 @@ import Products from './pages/Products';
 import Blog from './pages/Blog';
 import User from './pages/User';
 import NotFound from './pages/Page404';
+import Landing from './pages/Landing';
 
 // ----------------------------------------------------------------------
 
 export default function Router() {
   return useRoutes([
     {
-      path: '/dashboard',
+      path: '/main',
       element: <DashboardLayout />,
       children: [
-        { path: '/', element: <Navigate to="/dashboard/app" replace /> },
-        { path: 'app', element: <DashboardApp /> },
+        { path: '/', element: <Navigate to="/main/dashboard" replace /> },
+        { path: 'dashboard', element: <DashboardApp /> },
         { path: 'user', element: <User /> },
         { path: 'products', element: <Products /> },
         { path: 'blog', element: <Blog /> }
@@ -30,6 +31,7 @@ export default function Router() {
       path: '/',
       element: <LogoOnlyLayout />,
       children: [
+        { path: '/', element: <Landing/> },
         { path: 'login', element: <Login /> },
         { path: 'register', element: <Register /> },
         { path: '404', element: <NotFound /> },

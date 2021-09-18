@@ -71,12 +71,17 @@ export default function Login() {
           <LoginForm />
 
           {/* <MHidden width="smUp"> */}
-            <Typography variant="body2" align="center" sx={{ mt: 3 }}>
-              No tenés cuenta?&nbsp;
-              <Link variant="subtitle2" component={RouterLink} to="/register">
-                Regístrate
-              </Link>
-            </Typography>
+          <Typography variant="body2" align="center" sx={{ mt: 3 }}>
+            No tenés cuenta?&nbsp;
+            <Link variant="subtitle2" component={RouterLink} to="/register">
+              Regístrate
+            </Link>
+          </Typography>
+          <Typography variant="body2" align="center" sx={{ mt: 3 }}>
+            <Link variant="subtitle2" component={RouterLink} to="/">
+              Volver
+            </Link>
+          </Typography>
           {/* </MHidden> */}
         </ContentStyle>
       </Container>

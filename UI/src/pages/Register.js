@@ -86,6 +86,11 @@ export default function Register() {
                 Ingresar
               </Link>
             </Typography>
+            <Typography variant="body2" align="center" sx={{ mt: 3 }}>
+              <Link variant="subtitle2" component={RouterLink} to="/">
+                Volver
+              </Link>
+          </Typography>
           {/* </MHidden> */}
         </ContentStyle>
       </Container>

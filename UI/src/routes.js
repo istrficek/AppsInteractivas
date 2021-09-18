@@ -11,6 +11,7 @@ import Blog from './pages/Blog';
 import User from './pages/User';
 import NotFound from './pages/Page404';
 import Landing from './pages/Landing';
+import Checks from './pages/Checks';
 
 // ----------------------------------------------------------------------
 
@@ -25,6 +26,7 @@ export default function Router() {
         { path: 'user', element: <User /> },
         { path: 'products', element: <Products /> },
         { path: 'blog', element: <Blog /> },
+        { path: 'controles/:id', element: <Checks /> },
         { path: '*', element: <Navigate to="/404" replace /> }
       ]
     },

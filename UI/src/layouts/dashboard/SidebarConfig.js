@@ -23,7 +23,7 @@ const sidebarConfig = [
     icon: getIcon(baby),
     children: [{
       title: 'controles',
-      path: '/main/user',
+      path: '/main/controles/roberto',
       icon: getIcon(doctorIcon)
     },
     {
@@ -48,7 +48,7 @@ const sidebarConfig = [
     icon: getIcon(baby),
     children: [{
       title: 'controles',
-      path: '/main/user',
+      path: '/main/controles/camelia',
       icon: getIcon(doctorIcon)
     },
     {

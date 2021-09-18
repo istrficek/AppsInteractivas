@@ -1,5 +1,5 @@
 import { styled, alpha } from '@material-ui/core/styles';
-import { Card, Grid, Typography, Button, Stack } from '@material-ui/core';
+import { Card, Typography, Button, Stack } from '@material-ui/core';
 import { Icon } from '@iconify/react';
 import clockOutline from '@iconify/icons-eva/clock-outline';
 import mapOutline from '@iconify/icons-eva/map-outline';

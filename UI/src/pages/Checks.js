@@ -1,12 +1,9 @@
 import { Button, Container, Divider, Grid, Typography } from "@material-ui/core";
 import { useState } from "react";
 import { useParams } from "react-router";
-import { BaseOptionChart } from "src/components/charts";
-import ColorManyPicker from "src/components/ColorManyPicker";
 import ModalNewCheck from "src/components/modals/modalNewCheck";
 import NextAppointment from "src/components/NextAppointment";
 import Page from "src/components/Page";
-import { AppWebsiteVisits } from "src/components/_dashboard/app";
 import PercentileChart from "src/components/_dashboard/app/PercentileChart";
 
 export default function Checks () {

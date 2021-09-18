@@ -4,6 +4,8 @@ import { Icon } from '@iconify/react';
 import clockOutline from '@iconify/icons-eva/clock-outline';
 import mapOutline from '@iconify/icons-eva/map-outline';
 import doctorIcon from '@iconify/icons-healthicons/doctor';
+import vaccineIcon from '@iconify/icons-ic/outline-vaccines';
+import fileTextFill from '@iconify/icons-eva/file-text-fill';
 
 const RootStyle = styled(Card)(({theme}) => ({
     boxShadow: 'none',
@@ -46,12 +48,12 @@ const RootStyle = styled(Card)(({theme}) => ({
         //color: `${alpha(theme.palette.info.dark, 0.7)}`,        
       }));
 
-export default function NextAppointment() {
+export default function NextAppointment({ title, date, location, doctor, study, vaccine }) {
     return(
         <RootStyle>
             <TitleWrapperStyle>
                 <Typography variant="h4">
-                    Próximo Control Médico
+                    {title}
                 </Typography>
             </TitleWrapperStyle>
             <DateWrapperStyle>
@@ -59,25 +61,27 @@ export default function NextAppointment() {
                     <Stack direction="row" spacing={2}>
                         <Icon icon={clockOutline} width={20} height={25} />
                         <Typography variant="h6">
-                            24 de Agosto a las 15:30
+                            {date}
                         </Typography>
                     </Stack>
                     <Stack direction="row" spacing={2}>
                         <Icon icon={mapOutline} width={20} height={25} />
                         <Typography variant="h6">
-                            Corrientes 2241 "2 B"
+                            {location}
                         </Typography>
                     </Stack>
                     <Stack direction="row" spacing={2}>
                         <Icon icon={doctorIcon} width={20} height={25} />
                         <Typography variant="h6">
-                            Dra. Micaela Massa 
+                            {doctor} 
                         </Typography>
-                    </Stack>                    
+                    </Stack>
+                    {study && <Stack direction="row" spacing={2}> <Icon icon={fileTextFill} width={20} height={25} /> <Typography variant="h6"> {study}  </Typography> </Stack> }
+                    {vaccine && <Stack direction="row" spacing={2}> <Icon icon={vaccineIcon} width={20} height={25} /> <Typography variant="h6"> {vaccine}  </Typography> </Stack> }               
                 </Stack>
             </DateWrapperStyle>
             <ResultsButtonStyle>
-                <Button color="secondary" variant="contained">Agregar Resultados</Button>   
+                <Button color="secondary" variant="contained">Subir Resultados</Button>   
             </ResultsButtonStyle>                  
         </RootStyle>
     )

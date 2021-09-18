@@ -20,31 +20,24 @@ import { LoadingButton } from '@material-ui/lab';
 // ----------------------------------------------------------------------
 
 export default function NewCheckForm() {
-  const navigate = useNavigate();
-  const [showPassword, setShowPassword] = useState(false);
-
   const LoginSchema = Yup.object().shape({
-    email: Yup.string().email('El email tiene que ser válido').required('Email requerido'),
-    password: Yup.string().required('Contraseña requerida')
+    date: Yup.date('Formato de fecha incorrecto').required('Fecha Requerida'),
+    time: Yup.string().required('Hora Requerida'),
+    doctor: Yup.string().required('Doctor Requerido')
   });
 
   const formik = useFormik({
     initialValues: {
       email: '',
-      password: '',
-      remember: true
+      password: ''
     },
     validationSchema: LoginSchema,
     onSubmit: () => {
-      navigate('/main', { replace: true });
+      console.log("Perfectirijillo")
     }
   });
 
   const { errors, touched, values, isSubmitting, handleSubmit, getFieldProps } = formik;
-
-  const handleShowPassword = () => {
-    setShowPassword((show) => !show);
-  };
 
   return (
     <FormikProvider value={formik}>
@@ -52,54 +45,41 @@ export default function NewCheckForm() {
         <Stack spacing={3}>
           <TextField
             fullWidth
-            autoComplete="username"
-            type="email"
-            label="Email"
-            {...getFieldProps('email')}
-            error={Boolean(touched.email && errors.email)}
-            helperText={touched.email && errors.email}
+            type="text"
+            label="Fecha"
+            {...getFieldProps('date')}
+            error={Boolean(touched.date && errors.date)}
+            helperText={touched.date && errors.date}
           />
 
           <TextField
             fullWidth
-            autoComplete="current-password"
-            type={showPassword ? 'text' : 'password'}
-            label="Contraseña"
-            {...getFieldProps('password')}
-            InputProps={{
-              endAdornment: (
-                <InputAdornment position="end">
-                  <IconButton onClick={handleShowPassword} edge="end">
-                    <Icon icon={showPassword ? eyeFill : eyeOffFill} />
-                  </IconButton>
-                </InputAdornment>
-              )
-            }}
-            error={Boolean(touched.password && errors.password)}
-            helperText={touched.password && errors.password}
-          />
-        </Stack>
-
-        <Stack direction="row" alignItems="center" justifyContent="space-between" sx={{ my: 2 }}>
-          <FormControlLabel
-            control={<Checkbox {...getFieldProps('remember')} checked={values.remember} />}
-            label="Recordar"
+            type="text"
+            label="Hora"
+            {...getFieldProps('time')}          
+            error={Boolean(touched.time && errors.time)}
+            helperText={touched.time && errors.time}
           />
 
-          <Link component={RouterLink} variant="subtitle2" to="#">
-            Te olvidaste la contraseña?
-          </Link>
-        </Stack>
+          <TextField
+            fullWidth
+            type="text"
+            label="Pediatra"
+            {...getFieldProps('doctor')}          
+            error={Boolean(touched.doctor && errors.doctor)}
+            helperText={touched.doctor && errors.doctor}
+          />
 
-        <LoadingButton
-          fullWidth
-          size="large"
-          type="submit"
-          variant="contained"
-          loading={isSubmitting}
-        >
-          Ingresar
-        </LoadingButton>
+          <LoadingButton
+            fullWidth
+            size="large"
+            type="submit"
+            variant="contained"
+            loading={isSubmitting}
+            >
+            Programar
+          </LoadingButton>
+        </Stack>
       </Form>
     </FormikProvider>
   );

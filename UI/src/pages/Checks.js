@@ -26,11 +26,16 @@ export default function Checks () {
             <Container maxWidth="lg">
                 <Grid sx={{ flexGrow: 1 }} container spacing={6} justifyContent="center">
                     <Grid item xs={12} sm={12} md={12}>
-                        <NextAppointment></NextAppointment>
+                        <NextAppointment 
+                            title="Próximo Control Médico" 
+                            date="24 de Agosto a las 15:30"
+                            location="Corrientes 2241 '2 B'"
+                            doctor="Dra. Micaela Massa"
+                        />
                     </Grid>
                     <Grid item xs={12} sm={12} md={12}>
                         <Button variant="contained" size="large" onClick={newCheckOpen}>
-                            Agregar Control
+                            Programar Nuevo Control
                         </Button>
                     </Grid>
                 </Grid>

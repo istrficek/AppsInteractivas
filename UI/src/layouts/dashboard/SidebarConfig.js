@@ -28,12 +28,12 @@ const sidebarConfig = [
     },
     {
       title: 'estudios',
-      path: '/main/blog',
+      path: '/main/estudios/roberto',
       icon: getIcon(fileTextFill)
     },
     {
       title: 'vacunas',
-      path: '/main/blog',
+      path: '/main/vacunas/roberto',
       icon: getIcon(vaccine)
     },
     {
@@ -53,12 +53,12 @@ const sidebarConfig = [
     },
     {
       title: 'estudios',
-      path: '/main/blog',
+      path: '/main/estudios/camelia',
       icon: getIcon(fileTextFill)
     },
     {
       title: 'vacunas',
-      path: '/main/blog',
+      path: '/main/vacunas/camelia',
       icon: getIcon(vaccine)
     },
     {

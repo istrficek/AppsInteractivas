@@ -12,6 +12,8 @@ import User from './pages/User';
 import NotFound from './pages/Page404';
 import Landing from './pages/Landing';
 import Checks from './pages/Checks';
+import Studies from './pages/Studies';
+import Vaccines from './pages/Vaccines';
 
 // ----------------------------------------------------------------------
 
@@ -27,6 +29,8 @@ export default function Router() {
         { path: 'products', element: <Products /> },
         { path: 'blog', element: <Blog /> },
         { path: 'controles/:id', element: <Checks /> },
+        { path: 'estudios/:id', element: <Studies /> },
+        { path: 'vacunas/:id', element: <Vaccines /> },
         { path: '*', element: <Navigate to="/404" replace /> }
       ]
     },

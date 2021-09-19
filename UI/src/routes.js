@@ -11,6 +11,7 @@ import Landing from './pages/Landing';
 import Checks from './pages/Checks';
 import Studies from './pages/Studies';
 import Vaccines from './pages/Vaccines';
+import CheckResult from './pages/CheckResult';
 
 // ----------------------------------------------------------------------
 
@@ -25,6 +26,7 @@ export default function Router() {
         { path: 'controles/:id', element: <Checks /> },
         { path: 'estudios/:id', element: <Studies /> },
         { path: 'vacunas/:id', element: <Vaccines /> },
+        { path: 'controles/resultado/:id', element: <CheckResult /> },
         { path: '*', element: <Navigate to="/404" replace /> }
       ]
     },

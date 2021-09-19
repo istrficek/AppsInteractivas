@@ -1,6 +1,7 @@
 import { styled, alpha } from '@material-ui/core/styles';
 import { Card, Grid, Typography, Button } from '@material-ui/core';
 import { Icon } from '@iconify/react';
+import { Link as RouterLink, useNavigate } from 'react-router-dom';
 
 const RootStyle = styled(Card)(({theme}) => ({
   boxShadow: 'none',
@@ -33,7 +34,9 @@ const DateWrapperStyle = styled('div')(({ theme }) => ({
     backgroundColor: `${alpha(theme.palette.info.dark, 0.1)}` 
   }));
 
-export default function AppNextAppointment({ text, date, icon }) {
+export default function AppNextAppointment({ text, date, icon, url }) {
+  const navigate = useNavigate();
+
   return (
     <RootStyle>
       <IconWrapperStyle>
@@ -58,7 +61,7 @@ export default function AppNextAppointment({ text, date, icon }) {
             </Grid>
         </Grid>
       </DateWrapperStyle>
-      <Button variant="contained" color="primary">
+      <Button variant="contained" color="primary" onClick={()=>{navigate(url, { replace: true });}}>
         Ver
       </Button>
     </RootStyle>

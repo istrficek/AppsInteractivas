@@ -1,6 +1,6 @@
 import { Button, Container, Divider, Grid, Typography } from "@material-ui/core";
 import { useState } from "react";
-import { useParams } from "react-router";
+import { useNavigate, useParams } from "react-router";
 import ModalNewCheck from "src/components/modals/modalNewCheck";
 import NextAppointment from "src/components/NextAppointment";
 import Page from "src/components/Page";
@@ -8,6 +8,7 @@ import PercentileChart from "src/components/_dashboard/app/PercentileChart";
 
 export default function Checks () {
     const [openNewCheck, setOpenNewCheck] = useState(false)
+    const navigate = useNavigate();
 
     const newCheckClose = () => {
         setOpenNewCheck(false)
@@ -15,6 +16,10 @@ export default function Checks () {
 
     const newCheckOpen = () => {
         setOpenNewCheck(true);
+    }
+
+    const checkResultOpen = () => {
+        navigate("/main/controles/resultado/roberto", { replace: true } )
     }
 
     let { id } = useParams();
@@ -28,6 +33,7 @@ export default function Checks () {
                             date="24 de Agosto a las 15:30"
                             location="Corrientes 2241 '2 B'"
                             doctor="Dra. Micaela Massa"
+                            buttonPress={checkResultOpen}
                         />
                     </Grid>
                     <Grid item xs={12} sm={12} md={12}>
@@ -57,7 +63,7 @@ export default function Checks () {
                     </Grid>               
                 </Grid>
             </Container>
-            <ModalNewCheck open={openNewCheck} close={()=>newCheckClose()}></ModalNewCheck>
+            <ModalNewCheck open={openNewCheck} close={()=>newCheckClose()}></ModalNewCheck>            
         </Page>
     )
 }

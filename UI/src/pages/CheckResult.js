@@ -1,4 +1,4 @@
-import { Card, CardHeader, CardContent, Container } from "@material-ui/core";
+import { Card, CardHeader, CardContent, Container } from "@mui/material";
 import CheckResultForm from "src/components/modals/forms/CheckResultForm";
 import Page from "src/components/Page";
 

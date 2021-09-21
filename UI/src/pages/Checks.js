@@ -1,4 +1,4 @@
-import { Button, Container, Divider, Grid, Typography } from "@material-ui/core";
+import { Button, Container, Divider, Grid, Typography } from "@mui/material";
 import { useState } from "react";
 import { useNavigate, useParams } from "react-router";
 import ModalNewCheck from "src/components/modals/modalNewCheck";

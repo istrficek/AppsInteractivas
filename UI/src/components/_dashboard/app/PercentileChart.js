@@ -1,5 +1,5 @@
-import { Card, CardHeader } from "@material-ui/core";
-import { Box } from "@material-ui/system";
+import { Card, CardHeader } from "@mui/material";
+import { Box } from "@mui/system";
 import React from "react";
 import Chart from "react-apexcharts";
 

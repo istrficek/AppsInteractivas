@@ -1,5 +1,5 @@
-import { styled, alpha } from '@material-ui/core/styles';
-import { Card, Grid, Typography, Button } from '@material-ui/core';
+import { styled, alpha } from '@mui/material/styles';
+import { Card, Grid, Typography, Button } from '@mui/material';
 import { Icon } from '@iconify/react';
 import { Link as RouterLink, useNavigate } from 'react-router-dom';
 

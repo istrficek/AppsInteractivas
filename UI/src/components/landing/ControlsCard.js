@@ -1,4 +1,4 @@
-import { Card, CardContent, CardMedia, Typography } from '@material-ui/core';
+import { Card, CardContent, CardMedia, Typography } from '@mui/material';
 import * as React from 'react';
 
 export default function ControlsCard() {

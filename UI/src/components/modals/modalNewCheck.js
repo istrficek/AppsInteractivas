@@ -1,4 +1,4 @@
-import { Fade, Modal, Box, Typography, Backdrop, Card, CardHeader, CardContent } from "@material-ui/core";
+import { Fade, Modal, Box, Typography, Backdrop, Card, CardHeader, CardContent } from "@mui/material";
 import NewCheckForm from "./forms/NewCheckForm";
 
 export default function ModalNewCheck ({ open, close }){

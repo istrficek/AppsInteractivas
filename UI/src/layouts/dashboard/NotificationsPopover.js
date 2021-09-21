@@ -11,7 +11,7 @@ import doneAllFill from '@iconify/icons-eva/done-all-fill';
 import doctorIcon from '@iconify/icons-healthicons/doctor';
 import vaccine from '@iconify/icons-ic/outline-vaccines';
 // material
-import { alpha } from '@material-ui/core/styles';
+import { alpha } from '@mui/material/styles';
 import {
   Box,
   List,
@@ -26,7 +26,7 @@ import {
   ListSubheader,
   ListItemAvatar,
   ListItemButton
-} from '@material-ui/core';
+} from '@mui/material';
 // utils
 import { mockImgAvatar } from '../../utils/mockImages';
 // components
@@ -179,85 +179,83 @@ export default function NotificationsPopover() {
     );
   };
 
-  return (
-    <>
-      <IconButton
-        ref={anchorRef}
-        size="large"
-        color={open ? 'primary' : 'default'}
-        onClick={handleOpen}
-        sx={{
-          ...(open && {
-            bgcolor: (theme) => alpha(theme.palette.primary.main, theme.palette.action.focusOpacity)
-          })
-        }}
-      >
-        <Badge badgeContent={totalUnRead} color="error">
-          <Icon icon={bellFill} width={20} height={20} />
-        </Badge>
-      </IconButton>
+  return <>
+    <IconButton
+      ref={anchorRef}
+      size="large"
+      color={open ? 'primary' : 'default'}
+      onClick={handleOpen}
+      sx={{
+        ...(open && {
+          bgcolor: (theme) => alpha(theme.palette.primary.main, theme.palette.action.focusOpacity)
+        })
+      }}
+    >
+      <Badge badgeContent={totalUnRead} color="error">
+        <Icon icon={bellFill} width={20} height={20} />
+      </Badge>
+    </IconButton>
 
-      <MenuPopover
-        open={open}
-        onClose={handleClose}
-        anchorEl={anchorRef.current}
-        sx={{ width: 360 }}
-      >
-        <Box sx={{ display: 'flex', alignItems: 'center', py: 2, px: 2.5 }}>
-          <Box sx={{ flexGrow: 1 }}>
-            <Typography variant="subtitle1">Notificaciones</Typography>
-            <Typography variant="body2" sx={{ color: 'text.secondary' }}>
-              Tenes {totalUnRead} mensajes sin leer
-            </Typography>
-          </Box>
-
-          {totalUnRead > 0 && (
-            <Tooltip title=" Marcar Todo Como Leido">
-              <IconButton color="primary" onClick={handleMarkAllAsRead}>
-                <Icon icon={doneAllFill} width={20} height={20} />
-              </IconButton>
-            </Tooltip>
-          )}
+    <MenuPopover
+      open={open}
+      onClose={handleClose}
+      anchorEl={anchorRef.current}
+      sx={{ width: 360 }}
+    >
+      <Box sx={{ display: 'flex', alignItems: 'center', py: 2, px: 2.5 }}>
+        <Box sx={{ flexGrow: 1 }}>
+          <Typography variant="subtitle1">Notificaciones</Typography>
+          <Typography variant="body2" sx={{ color: 'text.secondary' }}>
+            Tenes {totalUnRead} mensajes sin leer
+          </Typography>
         </Box>
 
-        <Divider />
+        {totalUnRead > 0 && (
+          <Tooltip title=" Marcar Todo Como Leido">
+            <IconButton color="primary" onClick={handleMarkAllAsRead} size="large">
+              <Icon icon={doneAllFill} width={20} height={20} />
+            </IconButton>
+          </Tooltip>
+        )}
+      </Box>
 
-        <Scrollbar sx={{ height: { xs: 340, sm: 'auto' } }}>
-          <List
-            disablePadding
-            subheader={
-              <ListSubheader disableSticky sx={{ py: 1, px: 2.5, typography: 'overline' }}>
-                Nuevos
-              </ListSubheader>
-            }
-          >
-            {notifications.slice(0, 2).map((notification) => (
-              <NotificationItem key={notification.id} notification={notification} />
-            ))}
-          </List>
+      <Divider />
 
-          {/* <List
-            disablePadding
-            subheader={
-              <ListSubheader disableSticky sx={{ py: 1, px: 2.5, typography: 'overline' }}>
-                Leidos
-              </ListSubheader>
-            }
-          >
-            {notifications.slice(2, 5).map((notification) => (
-              <NotificationItem key={notification.id} notification={notification} />
-            ))}
-          </List> */}
-        </Scrollbar>
+      <Scrollbar sx={{ height: { xs: 340, sm: 'auto' } }}>
+        <List
+          disablePadding
+          subheader={
+            <ListSubheader disableSticky sx={{ py: 1, px: 2.5, typography: 'overline' }}>
+              Nuevos
+            </ListSubheader>
+          }
+        >
+          {notifications.slice(0, 2).map((notification) => (
+            <NotificationItem key={notification.id} notification={notification} />
+          ))}
+        </List>
 
-        <Divider />
+        {/* <List
+          disablePadding
+          subheader={
+            <ListSubheader disableSticky sx={{ py: 1, px: 2.5, typography: 'overline' }}>
+              Leidos
+            </ListSubheader>
+          }
+        >
+          {notifications.slice(2, 5).map((notification) => (
+            <NotificationItem key={notification.id} notification={notification} />
+          ))}
+        </List> */}
+      </Scrollbar>
 
-        <Box sx={{ p: 1 }}>
-          <Button fullWidth disableRipple component={RouterLink} to="#">
-            Ver Todos
-          </Button>
-        </Box>
-      </MenuPopover>
-    </>
-  );
+      <Divider />
+
+      <Box sx={{ p: 1 }}>
+        <Button fullWidth disableRipple component={RouterLink} to="#">
+          Ver Todos
+        </Button>
+      </Box>
+    </MenuPopover>
+  </>;
 }

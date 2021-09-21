@@ -1,5 +1,5 @@
-import { AppBar, Button, Container, Divider, Grid, Toolbar, Typography } from "@material-ui/core";
-import { makeStyles } from '@material-ui/styles';
+import { AppBar, Button, Container, Divider, Grid, Toolbar, Typography } from "@mui/material";
+import { makeStyles } from '@mui/styles';
 import { useNavigate } from "react-router";
 import BabiesHealthCardCard from "src/components/landing/BabiesHealthCard";
 import ControlsCard from "src/components/landing/ControlsCard";

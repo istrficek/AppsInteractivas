@@ -3,7 +3,7 @@ import vaccine from '@iconify/icons-ic/outline-vaccines';
 import fileTextFill from '@iconify/icons-eva/file-text-fill';
 import doctorIcon from '@iconify/icons-healthicons/doctor';
 // material
-import { Grid, Container } from '@material-ui/core';
+import { Grid, Container } from '@mui/material';
 // components
 import Page from '../components/Page';
 import { AppNextAppointment } from '../components/_dashboard/app';

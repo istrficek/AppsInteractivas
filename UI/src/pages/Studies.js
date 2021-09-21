@@ -1,4 +1,4 @@
-import { Container, Grid, Button, Divider } from "@material-ui/core";
+import { Container, Grid, Button, Divider } from "@mui/material";
 import NextAppointment from "src/components/NextAppointment";
 import Page from "src/components/Page";
 

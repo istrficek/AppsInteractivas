@@ -68,6 +68,13 @@ export default function Profile() {
                                     <Stack spacing={4}>
                                         <TextField 
                                             fullWidth
+                                            autoComplete="mail"
+                                            type="text"
+                                            label="Mail"
+                                        />
+
+                                        <TextField 
+                                            fullWidth
                                             autoComplete="phone"
                                             type="text"
                                             label="Celular"

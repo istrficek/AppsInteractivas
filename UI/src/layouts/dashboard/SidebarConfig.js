@@ -4,8 +4,8 @@ import vaccine from '@iconify/icons-ic/outline-vaccines';
 import fileTextFill from '@iconify/icons-eva/file-text-fill';
 import baby from '@iconify/icons-healthicons/baby-0203m';
 import meds from '@iconify/icons-healthicons/medicines';
-import settings from '@iconify/icons-eva/settings-2-fill';
 import doctorIcon from '@iconify/icons-healthicons/doctor';
+import activityFill from '@iconify/icons-eva/activity-fill';
 
 // ----------------------------------------------------------------------
 
@@ -36,10 +36,15 @@ const sidebarConfig = [
       path: '/main/vacunas/roberto',
       icon: getIcon(vaccine)
     },
+    // {
+    //   title: 'medicamentos',
+    //   path: '/main/blog',
+    //   icon: getIcon(meds)
+    // },
     {
-      title: 'medicamentos',
-      path: '/main/blog',
-      icon: getIcon(meds)
+      title: 'percentiles',
+      path: '/main/percentiles/roberto',
+      icon: getIcon(activityFill)
     }]
   },
   {
@@ -61,10 +66,15 @@ const sidebarConfig = [
       path: '/main/vacunas/camelia',
       icon: getIcon(vaccine)
     },
+    // {
+    //   title: 'medicamentos',
+    //   path: '/main/blog',
+    //   icon: getIcon(meds)
+    // },
     {
-      title: 'medicamentos',
-      path: '/main/blog',
-      icon: getIcon(meds)
+      title: 'percentiles',
+      path: '/main/percentiles/camelia',
+      icon: getIcon(activityFill)
     }]
   }
 ];

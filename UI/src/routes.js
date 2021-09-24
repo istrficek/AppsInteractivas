@@ -14,6 +14,7 @@ import Vaccines from './pages/Vaccines';
 import CheckResult from './pages/CheckResult';
 import Profile from './pages/Profile';
 import StudiesResult from './pages/StudiesResult';
+import Percentiles from './pages/Percentiles';
 
 // ----------------------------------------------------------------------
 
@@ -28,6 +29,7 @@ export default function Router() {
         { path: 'controles/:id', element: <Checks /> },
         { path: 'estudios/:id', element: <Studies /> },
         { path: 'vacunas/:id', element: <Vaccines /> },
+        { path: 'percentiles/:id', element: <Percentiles /> },
         { path: 'controles/resultado/:id', element: <CheckResult /> },
         { path: 'estudios/resultado/:id', element: <StudiesResult /> },
         { path: 'perfil', element: <Profile /> },

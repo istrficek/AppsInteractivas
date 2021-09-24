@@ -48,7 +48,7 @@ const RootStyle = styled(Card)(({theme}) => ({
         //color: `${alpha(theme.palette.info.dark, 0.7)}`,        
       }));
 
-export default function NextAppointment({ title, date, location, doctor, study, vaccine, buttonPress }) {
+export default function NextAppointment({ title, date, location, doctor, study, vaccine, buttonText, buttonPress }) {
     return(
         <RootStyle>
             <TitleWrapperStyle>
@@ -81,7 +81,7 @@ export default function NextAppointment({ title, date, location, doctor, study, 
                 </Stack>
             </DateWrapperStyle>
             <ResultsButtonStyle>
-                <Button color="secondary" variant="contained" onClick={()=>buttonPress()}>Subir Resultados</Button>   
+                <Button color="secondary" variant="contained" onClick={()=>buttonPress()}>{buttonText}</Button>   
             </ResultsButtonStyle>                  
         </RootStyle>
     )

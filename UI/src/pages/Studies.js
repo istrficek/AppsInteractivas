@@ -1,7 +1,8 @@
-import { Container, Grid, Button, Divider } from "@mui/material";
+import { Container, Grid, Button, Divider, CardHeader, CardContent, Card } from "@mui/material";
 import { useNavigate } from "react-router";
 import NextAppointment from "src/components/NextAppointment";
 import Page from "src/components/Page";
+import StudyTable from "src/components/tables/StudyTable";
 
 export default function Studies() {
     const navigate = useNavigate();
@@ -21,6 +22,7 @@ export default function Studies() {
                             location="Jufre 135 '1 A'"
                             doctor="Dr. Luis Pedraza"
                             study="Radiografía de Cabeza"
+                            buttonText="Subir Resultados"
                             buttonPress={studyResultOpen}
                         />
                     </Grid>
@@ -32,6 +34,18 @@ export default function Studies() {
                 </Grid>
             </Container>
             <Divider sx={{ marginTop:5, marginBottom:5 }} />
+            <Container maxWidth="false">
+                <Grid container>
+                    <Grid item xs={12}>
+                        <Card>
+                            <CardHeader title="Estudios Realizados" />
+                            <CardContent>
+                                <StudyTable />
+                            </CardContent>
+                        </Card>                        
+                    </Grid>
+                </Grid>
+            </Container>
         </Page>
     )
 } 

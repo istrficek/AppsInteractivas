@@ -13,6 +13,7 @@ import Studies from './pages/Studies';
 import Vaccines from './pages/Vaccines';
 import CheckResult from './pages/CheckResult';
 import Profile from './pages/Profile';
+import StudiesResult from './pages/StudiesResult';
 
 // ----------------------------------------------------------------------
 
@@ -28,6 +29,7 @@ export default function Router() {
         { path: 'estudios/:id', element: <Studies /> },
         { path: 'vacunas/:id', element: <Vaccines /> },
         { path: 'controles/resultado/:id', element: <CheckResult /> },
+        { path: 'estudios/resultado/:id', element: <StudiesResult /> },
         { path: 'perfil', element: <Profile /> },
         { path: '*', element: <Navigate to="/404" replace /> }
       ]

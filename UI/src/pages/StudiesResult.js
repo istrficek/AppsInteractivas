@@ -1,25 +1,25 @@
-import { Card, CardHeader, CardContent, Container, Box, Icon, CardActions, Button } from "@mui/material";
+import { Card, CardHeader, CardContent, Container, CardActions, Button } from "@mui/material";
 import { useNavigate } from "react-router";
-import CheckResultForm from "src/components/modals/forms/CheckResultForm";
+import StudyResultForm from "src/components/modals/forms/StudyResultForm";
 import Page from "src/components/Page";
 
-export default function CheckResult (){
+export default function StudiesResult (){
     const navigate = useNavigate();
 
     const handleReturn = () => {
-        navigate("/main/controles/roberto", { replace: true } )
+        navigate("/main/estudios/roberto", { replace: true } )
     }
 
     return(
-        <Page title="Resultado Control | Baby App">
+        <Page title="Resultado Estudio | Baby App">
             <Container maxWidth="lg">                
                 <Card>
                     <CardActions>
                         <Button size='medium' onClick={handleReturn}>Volver</Button>
                     </CardActions>
-                    <CardHeader title="Subir Resultado de Control"></CardHeader>                
+                    <CardHeader title="Subir Resultado de Estudio"></CardHeader>                
                     <CardContent>
-                        <CheckResultForm></CheckResultForm>
+                        <StudyResultForm></StudyResultForm>
                     </CardContent>
                 </Card>
             </Container>

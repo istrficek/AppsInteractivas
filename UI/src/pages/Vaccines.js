@@ -1,5 +1,6 @@
 import { Container, Grid, Button, Divider } from "@mui/material";
 import NextAppointment from "src/components/NextAppointment";
+import NextVaccines from "src/components/NextVaccines";
 import Page from "src/components/Page";
 
 export default function Vaccines() {
@@ -20,6 +21,14 @@ export default function Vaccines() {
                         <Button variant="contained" size="large">
                             Programar Vacunación
                         </Button>
+                    </Grid>
+                </Grid>
+            </Container>
+            <Divider sx={{ marginTop:5, marginBottom:5 }} />
+            <Container maxWidth="md">
+                <Grid container>
+                    <Grid item xs={12}>
+                        <NextVaccines />
                     </Grid>
                 </Grid>
             </Container>

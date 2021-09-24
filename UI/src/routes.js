@@ -12,6 +12,7 @@ import Checks from './pages/Checks';
 import Studies from './pages/Studies';
 import Vaccines from './pages/Vaccines';
 import CheckResult from './pages/CheckResult';
+import Profile from './pages/Profile';
 
 // ----------------------------------------------------------------------
 
@@ -27,6 +28,7 @@ export default function Router() {
         { path: 'estudios/:id', element: <Studies /> },
         { path: 'vacunas/:id', element: <Vaccines /> },
         { path: 'controles/resultado/:id', element: <CheckResult /> },
+        { path: 'perfil', element: <Profile /> },
         { path: '*', element: <Navigate to="/404" replace /> }
       ]
     },

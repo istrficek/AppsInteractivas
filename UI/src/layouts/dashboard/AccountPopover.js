@@ -19,7 +19,7 @@ const MENU_OPTIONS = [
   {
     label: 'Perfil',
     icon: personFill,
-    linkTo: '#'
+    linkTo: 'perfil'
   },
   {
     label: 'Configuración',

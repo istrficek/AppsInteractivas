@@ -10,6 +10,9 @@ import StudyCard from "src/components/landing/StudyCard";
 import VaccinationCalendarCard from "src/components/landing/VaccinationCalendarCard";
 import VaccineCard from "src/components/landing/VaccineCard";
 import Page from "src/components/Page";
+import { alpha } from '@mui/material/styles';
+import Logo from "src/components/Logo";
+import { Box } from "@mui/system";
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -21,7 +24,11 @@ const useStyles = makeStyles((theme) => ({
     title: {
       flexGrow: 1,
     },
-  }));
+    container: {
+      background: `url(/static/landing/family.jpg) no-repeat fixed center`,
+      backgroundSize: 'cover',
+    }
+    }));
 
 export default function Landing() {
     const navigate = useNavigate();
@@ -35,9 +42,10 @@ export default function Landing() {
     }
 
     return(
-        <Page title="Baby App">
+        <Page className={classes.container} title="Baby App">
           <AppBar position="static">
               <Toolbar>
+                  <Box component="img" src="/static/Baby-App-Face.png" sx={{ mr:3, pb:0.5,  width: 50, height: 50 }} />
                   <Typography variant="h6" className={classes.title}>
                   Baby App
                   </Typography>
@@ -45,7 +53,7 @@ export default function Landing() {
                   <Button color="inherit" onClick={LoginClick}>Ingresar</Button>
               </Toolbar>
           </AppBar>
-          <Container maxWidth="xl">
+          <Container sx={{ mt: 5 }}  maxWidth="xl">
             <Grid container spacing={1}>
               <Grid item xs={12} sm={5} md={4} lg={3}>
                 <ControlsCard />

@@ -3,7 +3,7 @@
 const account = {
   displayName: 'Ivo Strficek',
   email: 'ivo@ivo.com',
-  photoURL: '/static/mock-images/avatars/avatar_9.jpg'
+  photoURL: '/static/mock-images/avatars/avatar_23.jpg'
 };
 
 export default account;

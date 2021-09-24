@@ -13,6 +13,8 @@ import Page from "src/components/Page";
 import { alpha } from '@mui/material/styles';
 import Logo from "src/components/Logo";
 import { Box } from "@mui/system";
+import Masonry from '@mui/lab/Masonry';
+import MasonryItem from '@mui/lab/MasonryItem';
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -70,7 +72,7 @@ export default function Landing() {
             </Grid>
             <Divider sx={{ mt: 5, mb: 5 }} />
             <Typography variant="h3" > Artículos Útiles </Typography>
-            <Grid container spacing={1}>
+            {/* <Grid container spacing={1}>
               <Grid item xs={6} sm={6} md={6} lg={6}>
                 <VaccinationCalendarCard />
               </Grid>
@@ -83,7 +85,21 @@ export default function Landing() {
               <Grid item xs={6} sm={6} md={6} lg={6}>
                 <InfoForMothersCard />
               </Grid>          
-            </Grid>
+            </Grid> */}
+            <Masonry columns={2} spacing={2}>
+              <MasonryItem key={1}>
+                <VaccinationCalendarCard />
+              </MasonryItem>
+              <MasonryItem key={2}>
+                <PediatricControlCard />
+              </MasonryItem>
+              <MasonryItem key={3}>
+                <BabiesHealthCardCard />
+              </MasonryItem>
+              <MasonryItem key={4}>
+                <InfoForMothersCard />
+              </MasonryItem>
+            </Masonry>
           </Container>
         </Page>        
     )

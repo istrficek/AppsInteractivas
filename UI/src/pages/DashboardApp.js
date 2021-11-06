@@ -1,3 +1,4 @@
+import React from 'react';
 // icons
 import vaccine from '@iconify/icons-ic/outline-vaccines';
 import fileTextFill from '@iconify/icons-eva/file-text-fill';
@@ -7,10 +8,13 @@ import { Grid, Container } from '@mui/material';
 // components
 import Page from '../components/Page';
 import { AppNextAppointment } from '../components/_dashboard/app';
+import CustomSnack from 'src/components/snack/CustomSnack';
 
 // ----------------------------------------------------------------------
 
 export default function DashboardApp() {
+  const [open, setOpen] = React.useState(true);
+
   return (
     <Page title="Dashboard | Baby App">
       <Container maxWidth="xl">
@@ -26,6 +30,7 @@ export default function DashboardApp() {
           </Grid>         
         </Grid>
       </Container>
+      <CustomSnack open={open} type='success' text='Login exitoso. Bienvenido!' close={()=>{ setOpen(false) }} />
     </Page>
   );
 }

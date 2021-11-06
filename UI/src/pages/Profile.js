@@ -2,8 +2,14 @@ import Page from "src/components/Page";
 import { Container, Grid, Avatar, Typography, Card, CardContent, CardHeader, Stack, TextField, Divider, Button, Link } from "@mui/material";
 import account from '../_mocks_/account';
 import ChildCard from "src/components/profile/ChildCard";
+import { useContext } from "react";
+import { DataContext } from '../context'
+
 
 export default function Profile() {
+    const { currentUser, url } = useContext(DataContext);
+    const { user } = currentUser
+
     return (
         <Page title="Perfil | Baby App">
             <Container maxWidth="lg">
@@ -11,14 +17,14 @@ export default function Profile() {
                     <Grid container spacing={4} alignItems="center" >
                         <Grid item>
                             <Stack>
-                                <Avatar sx={{ width: 150, height: 150 }} src={account.photoURL} alt="photoURL" />
+                                <Avatar sx={{ width: 150, height: 150 }} src={user.picture} alt="photoURL" />
                                 <Link sx={{ pl:4.5 }} href="#" underline="always" variant="caption">
                                     {"Cambiar Foto"}
                                 </Link>
                             </Stack>                            
                         </Grid>
                         <Grid item>
-                            <Typography variant="h3">Ivo Strficek</Typography>
+                            <Typography variant="h3">{user.name + ' ' + user.last_name}</Typography>
                         </Grid>
                         <Grid item xs={12}> 
                         

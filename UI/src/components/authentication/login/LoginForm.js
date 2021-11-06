@@ -1,10 +1,11 @@
 import * as Yup from 'yup';
-import { useState } from 'react';
+import { useState, useContext } from 'react';
 import { Link as RouterLink, useNavigate } from 'react-router-dom';
 import { useFormik, Form, FormikProvider } from 'formik';
 import { Icon } from '@iconify/react';
 import eyeFill from '@iconify/icons-eva/eye-fill';
 import eyeOffFill from '@iconify/icons-eva/eye-off-fill';
+import { DataContext } from '../../../context'
 // material
 import {
   Link,
@@ -22,6 +23,8 @@ import { LoadingButton } from '@mui/lab';
 export default function LoginForm() {
   const navigate = useNavigate();
   const [showPassword, setShowPassword] = useState(false);
+  const [ isSubmitting, setIsSubmitting ] = useState(false);
+  const { currentUser, setCurrentUser, url } = useContext(DataContext);
 
   const LoginSchema = Yup.object().shape({
     email: Yup.string().email('El email tiene que ser válido').required('Email requerido'),
@@ -36,11 +39,32 @@ export default function LoginForm() {
     },
     validationSchema: LoginSchema,
     onSubmit: () => {
-      navigate('/main', { replace: true });
+      const userLogin = {
+        mail: getFieldProps('email').value,
+        password: getFieldProps('password').value
+      }
+      fetch( url + "/api/users/login", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(userLogin),
+      })
+      .then((response) => response.json())
+      .then((data) => {
+        setIsSubmitting(false);
+        setCurrentUser(data);
+        navigate('/main', { replace: true });
+        console.log("Success:", data);
+      })
+      .catch((error) => {
+        setIsSubmitting(false);
+        console.error("Error:", error);
+      })      
     }
   });
 
-  const { errors, touched, values, isSubmitting, handleSubmit, getFieldProps } = formik;
+  const { errors, touched, values, handleSubmit, getFieldProps } = formik;
 
   const handleShowPassword = () => {
     setShowPassword((show) => !show);

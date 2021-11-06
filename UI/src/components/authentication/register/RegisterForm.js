@@ -59,13 +59,13 @@ export default function RegisterForm() {
         .then((response) => response.json())
         .then((data) => {
           setIsSubmitting(false);
+          navigate('/login', { replace: true });
           console.log("Success:", data);
         })
         .catch((error) => {
           setIsSubmitting(false);
           console.error("Error:", error);
         })
-      //navigate('/main', { replace: true });
     }
   });
 

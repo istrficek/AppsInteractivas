@@ -14,7 +14,6 @@ module.exports = (sequelize, DataTypes) => {
     }
   };
   child_of.init({
-    id: DataTypes.INTEGER,
     user_id: DataTypes.INTEGER,
     child_id: DataTypes.INTEGER
   }, {

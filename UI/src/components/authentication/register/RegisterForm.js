@@ -8,12 +8,14 @@ import { useNavigate } from 'react-router-dom';
 // material
 import { Stack, TextField, IconButton, InputAdornment } from '@mui/material';
 import { LoadingButton } from '@mui/lab';
+import { phone } from 'faker';
 
 // ----------------------------------------------------------------------
 
 export default function RegisterForm() {
   const navigate = useNavigate();
   const [showPassword, setShowPassword] = useState(false);
+  const [ isSubmitting, setIsSubmitting ] = useState(false); 
 
   const RegisterSchema = Yup.object().shape({
     firstName: Yup.string()
@@ -38,11 +40,36 @@ export default function RegisterForm() {
     },
     validationSchema: RegisterSchema,
     onSubmit: () => {
-      navigate('/main', { replace: true });
+      setIsSubmitting(true);
+      const newUser = {
+        name: getFieldProps('firstName').value,
+        last_name: getFieldProps('lastName').value,
+        dni: getFieldProps('dni').value,
+        phone: getFieldProps('phone').value,
+        mail: getFieldProps('email').value,
+        password: getFieldProps('password').value
+      }
+      fetch("http://localhost:3000/api/users/register", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(newUser),
+      })
+        .then((response) => response.json())
+        .then((data) => {
+          setIsSubmitting(false);
+          console.log("Success:", data);
+        })
+        .catch((error) => {
+          setIsSubmitting(false);
+          console.error("Error:", error);
+        })
+      //navigate('/main', { replace: true });
     }
   });
 
-  const { errors, touched, handleSubmit, isSubmitting, getFieldProps } = formik;
+  var { errors, touched, handleSubmit, getFieldProps } = formik;
 
   return (
     <FormikProvider value={formik}>

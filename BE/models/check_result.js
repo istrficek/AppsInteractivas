@@ -2,6 +2,8 @@
 const {
   Model
 } = require('sequelize');
+const check = require('./check');
+
 module.exports = (sequelize, DataTypes) => {
   class check_result extends Model {
     /**
@@ -14,7 +16,15 @@ module.exports = (sequelize, DataTypes) => {
     }
   };
   check_result.init({
-    check_id: DataTypes.INTEGER,
+    check_id: {
+      type: DataTypes.INTEGER,
+      references: {
+        // This is a reference to another model
+        model: 'check',  
+        // This is the column name of the referenced model
+        key: 'id',
+      }
+    },    
     height: DataTypes.DECIMAL,
     weight: DataTypes.DECIMAL,
     head_size: DataTypes.DECIMAL,
@@ -26,6 +36,7 @@ module.exports = (sequelize, DataTypes) => {
   }, {
     sequelize,
     modelName: 'check_result',
+    freezeTableName: true
   });
   return check_result;
 };

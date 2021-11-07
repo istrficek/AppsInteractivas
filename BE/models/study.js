@@ -2,6 +2,8 @@
 const {
   Model
 } = require('sequelize');
+const child = require('./child');
+
 module.exports = (sequelize, DataTypes) => {
   class study extends Model {
     /**
@@ -14,7 +16,15 @@ module.exports = (sequelize, DataTypes) => {
     }
   };
   study.init({
-    child_id: DataTypes.INTEGER,
+    child_id: {
+      type: DataTypes.INTEGER,
+      references: {
+        // This is a reference to another model
+        model: 'child',  
+        // This is the column name of the referenced model
+        key: 'id',
+      }
+    },
     date: DataTypes.DATE,
     address: DataTypes.STRING,
     doctor: DataTypes.STRING,
@@ -22,6 +32,7 @@ module.exports = (sequelize, DataTypes) => {
   }, {
     sequelize,
     modelName: 'study',
+    freezeTableName: true
   });
   return study;
 };

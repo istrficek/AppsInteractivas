@@ -2,6 +2,9 @@
 const {
   Model
 } = require('sequelize');
+const child = require('./child');
+const user = require('./user');
+
 module.exports = (sequelize, DataTypes) => {
   class child_of extends Model {
     /**
@@ -14,11 +17,28 @@ module.exports = (sequelize, DataTypes) => {
     }
   };
   child_of.init({
-    user_id: DataTypes.INTEGER,
-    child_id: DataTypes.INTEGER
+    user_id: {
+      type: DataTypes.INTEGER,
+      references: {
+        // This is a reference to another model
+        model: 'user',  
+        // This is the column name of the referenced model
+        key: 'id',
+      }
+    },
+    child_id: {
+      type: DataTypes.INTEGER,
+      references: {
+        // This is a reference to another model
+        model: 'child',  
+        // This is the column name of the referenced model
+        key: 'id',
+      }
+    },
   }, {
     sequelize,
     modelName: 'child_of',
+    freezeTableName: true
   });
   return child_of;
 };

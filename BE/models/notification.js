@@ -2,6 +2,8 @@
 const {
   Model
 } = require('sequelize');
+const user = require('./user');
+
 module.exports = (sequelize, DataTypes) => {
   class notification extends Model {
     /**
@@ -15,6 +17,15 @@ module.exports = (sequelize, DataTypes) => {
   };
   notification.init({
     title: DataTypes.STRING,
+    user_id: {
+      type: DataTypes.INTEGER,
+      references: {
+        // This is a reference to another model
+        model: 'user',  
+        // This is the column name of the referenced model
+        key: 'id',
+      }
+    },
     description: DataTypes.STRING,
     avatar: DataTypes.STRING,
     type: DataTypes.STRING,
@@ -22,6 +33,7 @@ module.exports = (sequelize, DataTypes) => {
   }, {
     sequelize,
     modelName: 'notification',
+    freezeTableName: true
   });
   return notification;
 };

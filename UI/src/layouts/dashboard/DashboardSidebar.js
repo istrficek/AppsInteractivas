@@ -10,7 +10,8 @@ import Scrollbar from '../../components/Scrollbar';
 import NavSection from '../../components/NavSection';
 import { MHidden } from '../../components/@material-extend';
 //
-import sidebarConfig from './SidebarConfig';
+//import sidebarConfig from './SidebarConfig';
+import { getMenu } from 'src/services/MenuService';
 import { DataContext } from '../../context'
 
 // ----------------------------------------------------------------------
@@ -80,7 +81,7 @@ export default function DashboardSidebar({ isOpenSidebar, onCloseSidebar }) {
         </Link>
       </Box>
 
-      <NavSection navConfig={sidebarConfig} />
+      <NavSection navConfig={getMenu()} />
     </Scrollbar>
   );
 

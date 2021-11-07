@@ -33,7 +33,7 @@ const MENU_OPTIONS = [
 export default function AccountPopover() {
   const anchorRef = useRef(null);
   const [open, setOpen] = useState(false);
-  const { currentUser, url } = useContext(DataContext);
+  const { currentUser, setCurrentUser, url } = useContext(DataContext);
   const { user } = currentUser
   const navigate = useNavigate();
 
@@ -45,6 +45,7 @@ export default function AccountPopover() {
   };
 
   const LogOutClicked = () => {
+    setCurrentUser({});
     navigate('/', { replace: true });
   }
 

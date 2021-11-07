@@ -15,6 +15,7 @@ import CheckResult from './pages/CheckResult';
 import Profile from './pages/Profile';
 import StudiesResult from './pages/StudiesResult';
 import Percentiles from './pages/Percentiles';
+import PrivateRoute from './components/authentication/PrivateRoute';
 
 // ----------------------------------------------------------------------
 
@@ -22,7 +23,7 @@ export default function Router() {
   return useRoutes([
     {
       path: '/main',
-      element: <DashboardLayout />,
+      element: <PrivateRoute><DashboardLayout /></PrivateRoute>,
       children: [
         { path: '/', element: <Navigate to="/main/dashboard" replace /> },
         { path: 'dashboard', element: <DashboardApp /> },

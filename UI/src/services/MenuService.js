@@ -1,0 +1,74 @@
+import { Icon } from '@iconify/react';
+import pieChart2Fill from '@iconify/icons-eva/pie-chart-2-fill';
+import vaccine from '@iconify/icons-ic/outline-vaccines';
+import fileTextFill from '@iconify/icons-eva/file-text-fill';
+import baby from '@iconify/icons-healthicons/baby-0203m';
+import doctorIcon from '@iconify/icons-healthicons/doctor';
+import activityFill from '@iconify/icons-eva/activity-fill';
+
+// ----------------------------------------------------------------------
+
+const getIcon = (name) => <Icon icon={name} width={22} height={22} />;
+
+const sidebarConfig = [
+  {
+    title: 'dashboard',
+    path: '/main/dashboard',
+    icon: getIcon(pieChart2Fill)
+  },
+  {
+    title: 'Robertito',
+    path: '/main/products',
+    icon: getIcon(baby),
+    children: [{
+      title: 'controles',
+      path: '/main/controles/roberto',
+      icon: getIcon(doctorIcon)
+    },
+    {
+      title: 'estudios',
+      path: '/main/estudios/roberto',
+      icon: getIcon(fileTextFill)
+    },
+    {
+      title: 'vacunas',
+      path: '/main/vacunas/roberto',
+      icon: getIcon(vaccine)
+    },
+    {
+      title: 'percentiles',
+      path: '/main/percentiles/roberto',
+      icon: getIcon(activityFill)
+    }]
+  },
+  {
+    title: 'Camelia',
+    path: '/main/blog',
+    icon: getIcon(baby),
+    children: [{
+      title: 'controles',
+      path: '/main/controles/camelia',
+      icon: getIcon(doctorIcon)
+    },
+    {
+      title: 'estudios',
+      path: '/main/estudios/camelia',
+      icon: getIcon(fileTextFill)
+    },
+    {
+      title: 'vacunas',
+      path: '/main/vacunas/camelia',
+      icon: getIcon(vaccine)
+    },
+    {
+      title: 'percentiles',
+      path: '/main/percentiles/camelia',
+      icon: getIcon(activityFill)
+    }]
+  }
+];
+
+export const getMenu = () => {
+    return sidebarConfig;
+}
+

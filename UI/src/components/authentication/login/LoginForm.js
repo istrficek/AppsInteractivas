@@ -6,7 +6,6 @@ import { useFormik, Form, FormikProvider } from 'formik';
 import { Icon } from '@iconify/react';
 import eyeFill from '@iconify/icons-eva/eye-fill';
 import eyeOffFill from '@iconify/icons-eva/eye-off-fill';
-import Snackbar from '@mui/material/Snackbar';
 import { DataContext } from '../../../context'
 // material
 import {
@@ -16,19 +15,18 @@ import {
   TextField,
   IconButton,
   InputAdornment,
-  FormControlLabel, 
-  Alert
+  FormControlLabel
 } from '@mui/material';
 import { LoadingButton } from '@mui/lab';
-import CustomSnack from 'src/components/snack/CustomSnack';
+import { withSnackbar } from 'src/components/snack/CustomSnack';
 
 // ----------------------------------------------------------------------
 
-export default function LoginForm() {
+function LoginForm({ snackbarShowMessage }) {
   const navigate = useNavigate();
   const [showPassword, setShowPassword] = useState(false);
   const [ isSubmitting, setIsSubmitting ] = useState(false);
-  const { currentUser, setCurrentUser, url } = useContext(DataContext);
+  const { setCurrentUser, url } = useContext(DataContext);
   const [open, setOpen] = React.useState(false);
 
   const LoginSchema = Yup.object().shape({
@@ -52,6 +50,7 @@ export default function LoginForm() {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
+          //'x-access-token': WebToken.webToken
         },
         body: JSON.stringify(userLogin),
       })
@@ -59,12 +58,12 @@ export default function LoginForm() {
       .then((data) => {
         setIsSubmitting(false);
         if(data.error){
-          setOpen(true);
+          snackbarShowMessage('Usuario o contraseña incorrectos', 'error')
           formik.setFieldValue("email", '')
           formik.setFieldValue("password", '')
           console.log(data.error);          
         } else {
-          setCurrentUser(data);
+          setCurrentUser(data);          
           navigate('/main', { replace: true });
           console.log("Success:", data);
         }
@@ -140,7 +139,8 @@ export default function LoginForm() {
           </LoadingButton>
         </Form>
       </FormikProvider>
-      <CustomSnack open={open} type='error' text='Usuario o contraseña incorrecto' close={()=>{ setOpen(false) }} />
       </>
   );
 }
+
+export default withSnackbar(LoginForm);

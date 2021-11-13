@@ -1,43 +1,54 @@
 import { Card, Button, CardActions, CardContent, CardHeader, CardMedia, Stack, TextField } from "@mui/material";
+import { useState } from "react";
 import ComboBox from "../ComboBox";
 import DateTimePickerWrapper from "../DateTimePickerWrapper";
 
-export default function ChildCard({ name }) {
+export default function ChildCard({ child }) {   
+    const [allergies, setAllergies] = useState(child.allergies);
+    const [cronicDisease, setCronicDisease] = useState(child.cronic_diseases);
     return (
         <>
             <Card>
-                <CardHeader title={name} />
+                <CardHeader title={child.name} />
                 <CardMedia 
                     component="img"
                     height="140"
-                    image="/static/mock-images/childs/baby.jpg"                    
+                    image= {child.picture}                    
                 />
                 <CardContent>
                     <Stack spacing={2}>
+
                         <TextField 
                             fullWidth
                             autoComplete="dni"
+                            disabled
+                            value={child.dni}
                             type="text"
-                            label="Nombre"
+                            label="DNI"
                         />
 
                         <DateTimePickerWrapper 
                             label="Fecha de Nacimiento"
+
                         />
                         
-                        <ComboBox />
+                        <ComboBox value={child.blood_type_id} />
                         
                         <TextField 
                             fullWidth
-                            autoComplete="dni"
-                            type="text"
+                            autoComplete="alergies"
+                            type="text"      
+                            value = {allergies}
+                            onChange={(event) => { setAllergies(event.target.value) } }                      
                             label="Alergias"
                         />
                         
                         <TextField 
                             fullWidth
-                            autoComplete="dni"
+                            autoComplete="cronic disease"
                             type="text"
+                            value = {cronicDisease}
+                            onChange={(event) => { setCronicDisease(event.target.value) } }  
                             label="Enfermedades Crónicas"
                         />
                     </Stack>

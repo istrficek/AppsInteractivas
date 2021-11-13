@@ -1,12 +1,28 @@
 import { FormControl, InputLabel, MenuItem, Select } from "@mui/material";
-import { useState } from "react";
+import { useContext, useEffect, useState } from "react";
+import { DataContext } from "src/context";
 
-export default function ComboBox() {
-    const [val, setVal] = useState()
+export default function ComboBox({ value }) {
+    const [val, setVal] = useState(value);
+    const [elements, setElements] = useState([]);
+    const { url } = useContext(DataContext);
 
     const handleChange = (val) => {
         setVal(val);
     }
+
+    const getBloodTypes = () => {
+        fetch(url + '/api/blood-type/get')
+            .then((response) => response.json())
+            .then((data) => {
+                setElements(data);
+            })
+            .catch((error) => { console.log(error) });
+    }
+
+    useEffect(() => {
+        getBloodTypes();
+    }, [])
 
     return(
         <FormControl fullWidth>
@@ -19,14 +35,11 @@ export default function ComboBox() {
                 onChange={handleChange}
             >
                 <MenuItem value={-1}>Seleleccionar</MenuItem>
-                <MenuItem value={1}>O-</MenuItem>
-                <MenuItem value={2}>O+</MenuItem>   
-                <MenuItem value={3}>A-</MenuItem>
-                <MenuItem value={4}>A+</MenuItem> 
-                <MenuItem value={5}>B-</MenuItem>
-                <MenuItem value={6}>B+</MenuItem> 
-                <MenuItem value={7}>AB-</MenuItem>
-                <MenuItem value={8}>AB+</MenuItem>              
+                { elements.map((bloodType, i) => {
+                    return (
+                        <MenuItem value={bloodType.id}>{bloodType.description}</MenuItem>
+                    )
+                }) }             
             </Select>
         </FormControl>
     )

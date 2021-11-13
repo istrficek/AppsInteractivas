@@ -34,7 +34,6 @@ export default function AccountPopover() {
   const anchorRef = useRef(null);
   const [open, setOpen] = useState(false);
   const { currentUser, setCurrentUser, url } = useContext(DataContext);
-  const { user } = currentUser
   const navigate = useNavigate();
 
   const handleOpen = () => {
@@ -70,7 +69,7 @@ export default function AccountPopover() {
         })
       }}
       size="large">
-      <Avatar src={user.picture} alt="photoURL" />
+      <Avatar src={currentUser.picture} alt="photoURL" />
     </IconButton>
 
     <MenuPopover
@@ -81,10 +80,10 @@ export default function AccountPopover() {
     >
       <Box sx={{ my: 1.5, px: 2.5 }}>
         <Typography variant="subtitle1" noWrap>
-          {user.name + ' ' + user.last_name}
+          {currentUser.name + ' ' + currentUser.last_name}
         </Typography>
         <Typography variant="body2" sx={{ color: 'text.secondary' }} noWrap>
-          {user.mail}
+          {currentUser.mail}
         </Typography>
       </Box>
 

@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types';
-import { useContext, useEffect } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { Link as RouterLink, useLocation } from 'react-router-dom';
 // material
 import { styled } from '@mui/material/styles';
@@ -43,7 +43,6 @@ DashboardSidebar.propTypes = {
 export default function DashboardSidebar({ isOpenSidebar, onCloseSidebar }) {
   const { pathname } = useLocation();
   const { currentUser, url } = useContext(DataContext);
-  const { user } = currentUser
 
   useEffect(() => {
     if (isOpenSidebar) {
@@ -68,10 +67,10 @@ export default function DashboardSidebar({ isOpenSidebar, onCloseSidebar }) {
       <Box sx={{ mb: 5, mx: 2.5 }}>
         <Link underline="none" component={RouterLink} to="perfil">
           <AccountStyle>
-            <Avatar src={user.picture} alt="photoURL" />
+            <Avatar src={currentUser.picture} alt="photoURL" />
             <Box sx={{ ml: 2 }}>
               <Typography variant="subtitle2" sx={{ color: 'text.primary' }}>
-                {user.name + ' ' + user.last_name}
+                {currentUser.name + ' ' + currentUser.last_name}
               </Typography>
               {/* <Typography variant="body2" sx={{ color: 'text.secondary' }}>
                 ''
@@ -81,7 +80,7 @@ export default function DashboardSidebar({ isOpenSidebar, onCloseSidebar }) {
         </Link>
       </Box>
 
-      <NavSection navConfig={getMenu()} />
+      <NavSection navConfig={getMenu(currentUser)} />
     </Scrollbar>
   );
 

@@ -56,6 +56,7 @@ export default function Landing() {
               </Toolbar>
           </AppBar>
           <Container sx={{ mt: 5 }}  maxWidth="xl">
+          <Typography variant="h3" > Que te ofrecemos </Typography>
             <Grid container spacing={1}>
               <Grid item xs={12} sm={5} md={4} lg={3}>
                 <ControlsCard />

@@ -8,7 +8,7 @@ export default function ControlsCard() {
         component="img"
         alt="Controles Médicos"
         height="300"
-        image="/static/landing/controles.png"
+        image="/static/landing/controles.jpg"
       />
       <CardContent>
         <Typography gutterBottom variant="h5" component="div">

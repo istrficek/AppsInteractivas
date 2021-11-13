@@ -8,7 +8,7 @@ export default function StudyCard() {
         component="img"
         alt="Estudios"
         height="300"
-        image="/static/landing/estudios.png"
+        image="/static/landing/estudios2.png"
       />
       <CardContent>
         <Typography gutterBottom variant="h5" component="div">

@@ -27,6 +27,7 @@ module.exports = {
     logIn(req, res) {
       return User
         .findOne({
+          include: [{ all: true, nested: true }],
           where: {
             mail: req.body.mail
           },

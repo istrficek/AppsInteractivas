@@ -13,7 +13,14 @@ module.exports = (sequelize, DataTypes) => {
      * The `models/index` file will call this method automatically.
      */
     static associate(models) {
-      // define association here
+      child_of.hasOne(models.user, {
+        as: "user",
+        foreignKey: "id",
+      });
+      child_of.hasOne(models.child, {
+        as: "child",
+        foreignKey: "id",
+      });
     }
   };
   child_of.init({

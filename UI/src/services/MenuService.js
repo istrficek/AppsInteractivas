@@ -5,70 +5,57 @@ import fileTextFill from '@iconify/icons-eva/file-text-fill';
 import baby from '@iconify/icons-healthicons/baby-0203m';
 import doctorIcon from '@iconify/icons-healthicons/doctor';
 import activityFill from '@iconify/icons-eva/activity-fill';
+import { getChilds } from './ChildService';
 
 // ----------------------------------------------------------------------
 
 const getIcon = (name) => <Icon icon={name} width={22} height={22} />;
 
-const sidebarConfig = [
-  {
-    title: 'dashboard',
-    path: '/main/dashboard',
-    icon: getIcon(pieChart2Fill)
-  },
-  {
-    title: 'Robertito',
-    path: '/main/products',
-    icon: getIcon(baby),
-    children: [{
-      title: 'controles',
-      path: '/main/controles/roberto',
-      icon: getIcon(doctorIcon)
-    },
-    {
-      title: 'estudios',
-      path: '/main/estudios/roberto',
-      icon: getIcon(fileTextFill)
-    },
-    {
-      title: 'vacunas',
-      path: '/main/vacunas/roberto',
-      icon: getIcon(vaccine)
-    },
-    {
-      title: 'percentiles',
-      path: '/main/percentiles/roberto',
-      icon: getIcon(activityFill)
-    }]
-  },
-  {
-    title: 'Camelia',
-    path: '/main/blog',
-    icon: getIcon(baby),
-    children: [{
-      title: 'controles',
-      path: '/main/controles/camelia',
-      icon: getIcon(doctorIcon)
-    },
-    {
-      title: 'estudios',
-      path: '/main/estudios/camelia',
-      icon: getIcon(fileTextFill)
-    },
-    {
-      title: 'vacunas',
-      path: '/main/vacunas/camelia',
-      icon: getIcon(vaccine)
-    },
-    {
-      title: 'percentiles',
-      path: '/main/percentiles/camelia',
-      icon: getIcon(activityFill)
-    }]
-  }
-];
+var children = []
 
-export const getMenu = () => {
-    return sidebarConfig;
+export function getMenu(currentUser) { 
+  
+    var sidebar = [];
+  
+    var dasboard = {
+      title: 'dashboard',
+      path: '/main/dashboard',
+      icon: getIcon(pieChart2Fill)
+    };
+
+    sidebar.push(dasboard);    
+
+    currentUser.children.map((c)=>{
+      var item = {
+        title: c.child.name,
+        path:'',
+        icon: getIcon(baby),
+        children: [
+          {
+            title: 'controles',
+            path: '/main/controles/' + c.child.id,
+            icon: getIcon(doctorIcon)
+          },
+          {
+            title: 'estudios',
+            path: '/main/estudios/' + c.child.id,
+            icon: getIcon(fileTextFill)
+          },
+          {
+            title: 'vacunas',
+            path: '/main/vacunas/' + c.child.id,
+            icon: getIcon(vaccine)
+          },
+          {
+            title: 'percentiles',
+            path: '/main/percentiles/' + c.child.id,
+            icon: getIcon(activityFill)
+          }
+        ]
+      }
+      sidebar.push(item);
+    })
+
+    return sidebar;
 }
 

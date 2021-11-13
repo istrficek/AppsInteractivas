@@ -8,7 +8,7 @@ export default function PercentileCard() {
         component="img"
         alt="Estudios"
         height="300"
-        image="/static/landing/percentiles.png"
+        image="/static/landing/percentiles.gif"
       />
       <CardContent>
         <Typography gutterBottom variant="h5" component="div">

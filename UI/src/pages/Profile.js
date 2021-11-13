@@ -7,8 +7,7 @@ import { DataContext } from '../context'
 
 
 export default function Profile() {
-    const { currentUser, url } = useContext(DataContext);
-    const { user } = currentUser
+    const { currentUser } = useContext(DataContext);
 
     return (
         <Page title="Perfil | Baby App">
@@ -17,14 +16,14 @@ export default function Profile() {
                     <Grid container spacing={4} alignItems="center" >
                         <Grid item>
                             <Stack>
-                                <Avatar sx={{ width: 150, height: 150 }} src={user.picture} alt="photoURL" />
+                                <Avatar sx={{ width: 150, height: 150 }} src={currentUser.picture} alt="photoURL" />
                                 <Link sx={{ pl:4.5 }} href="#" underline="always" variant="caption">
                                     {"Cambiar Foto"}
                                 </Link>
                             </Stack>                            
                         </Grid>
                         <Grid item>
-                            <Typography variant="h3">{user.name + ' ' + user.last_name}</Typography>
+                            <Typography variant="h3">{currentUser.name + ' ' + currentUser.last_name}</Typography>
                         </Grid>
                         <Grid item xs={12}> 
                         
@@ -102,12 +101,19 @@ export default function Profile() {
                         <Grid item xs={12}>
                             <Typography variant="h4">Hijos</Typography>
                         </Grid>
-                        <Grid item xs={12} sm={12} md={6} lg={4} xl={4}>
+                        { currentUser.children.map((c, id) => {
+                            return (
+                                <Grid item xs={12} sm={12} md={6} lg={4} xl={4}>
+                                    <ChildCard child={c.child} />
+                                </Grid>
+                            )
+                        }) }
+                        {/* <Grid item xs={12} sm={12} md={6} lg={4} xl={4}>
                             <ChildCard name={"Camelia"} />
                         </Grid>
                         <Grid item xs={12} sm={12} md={6} lg={4} xl={4}>
                             <ChildCard name={"Roberto"} />
-                        </Grid>
+                        </Grid> */}
                         <Grid item xs={12} sm={12} md={6} lg={4} xl={4}>
                             <Button size="large" variant="contained">+ Agregar Hijo</Button>
                         </Grid>

@@ -1,4 +1,4 @@
-import { Fade, Modal, Box, Typography, Backdrop, Card, CardHeader, CardContent } from "@mui/material";
+import { Fade, Modal, Backdrop, Card, CardHeader, CardContent } from "@mui/material";
 import NewVaccineForm from "./forms/NewVaccineForm";
 
 export default function ModalNewVaccine ({ open, close }){

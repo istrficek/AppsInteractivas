@@ -8,7 +8,7 @@ export default function VaccineCard() {
         component="img"
         alt="Estudios"
         height="300"
-        image="/static/landing/vacunas.png"
+        image="/static/landing/vacunas.jpg"
       />
       <CardContent>
         <Typography gutterBottom variant="h5" component="div">

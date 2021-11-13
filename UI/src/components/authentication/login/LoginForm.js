@@ -26,8 +26,7 @@ function LoginForm({ snackbarShowMessage }) {
   const navigate = useNavigate();
   const [showPassword, setShowPassword] = useState(false);
   const [ isSubmitting, setIsSubmitting ] = useState(false);
-  const { setCurrentUser, url } = useContext(DataContext);
-  const [open, setOpen] = React.useState(false);
+  const { setCurrentUser, url, setToken } = useContext(DataContext);
 
   const LoginSchema = Yup.object().shape({
     email: Yup.string().email('El email tiene que ser válido').required('Email requerido'),
@@ -63,9 +62,10 @@ function LoginForm({ snackbarShowMessage }) {
           formik.setFieldValue("password", '')
           console.log(data.error);          
         } else {
-          setCurrentUser(data);          
+          setCurrentUser(data.user); 
+          setToken(data.token); 
           navigate('/main', { replace: true });
-          console.log("Success:", data);
+          //console.log("Success:", data);
         }
         
       })

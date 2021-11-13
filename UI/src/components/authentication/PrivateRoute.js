@@ -5,7 +5,7 @@ import { DataContext } from '../../context'
 const PrivateRoute = ({ children }) => {  
     const { currentUser } = useContext(DataContext);
 
-    return currentUser.user !== undefined ? children : <Navigate to="/login" />;
+    return currentUser !== undefined ? children : <Navigate to="/login" />;
 }
 
 export default PrivateRoute

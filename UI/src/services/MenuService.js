@@ -5,7 +5,6 @@ import fileTextFill from '@iconify/icons-eva/file-text-fill';
 import baby from '@iconify/icons-healthicons/baby-0203m';
 import doctorIcon from '@iconify/icons-healthicons/doctor';
 import activityFill from '@iconify/icons-eva/activity-fill';
-import { getChilds } from './ChildService';
 
 // ----------------------------------------------------------------------
 

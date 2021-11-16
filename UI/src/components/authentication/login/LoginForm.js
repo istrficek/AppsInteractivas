@@ -64,6 +64,7 @@ function LoginForm({ snackbarShowMessage }) {
         } else {
           setCurrentUser(data.user); 
           setToken(data.token); 
+          localStorage.setItem('token', data.token);      
           navigate('/main', { replace: true });
           //console.log("Success:", data);
         }

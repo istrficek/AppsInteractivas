@@ -1,15 +1,17 @@
-import { Card, Button, CardActions, CardContent, CardHeader, CardMedia, Stack, TextField } from "@mui/material";
+import { Card, Button, CardActions, CardContent, CardHeader, CardMedia, Stack, TextField, Chip } from "@mui/material";
 import { useState } from "react";
 import ComboBox from "../ComboBox";
-import DateTimePickerWrapper from "../DateTimePickerWrapper";
+import DatePickerWrapper from "../DatePickerWrapper";
+import TagsInput from "../TagsInput";
 
 export default function ChildCard({ child }) {   
-    const [allergies, setAllergies] = useState(child.allergies);
-    const [cronicDisease, setCronicDisease] = useState(child.cronic_diseases);
+    const [allergies, setAllergies] = useState([]);
+    const [cronicDisease, setCronicDisease] = useState([]);
+
     return (
         <>
             <Card>
-                <CardHeader title={child.name} />
+                <CardHeader title={child.name + ' ' + child.last_name} />
                 <CardMedia 
                     component="img"
                     height="140"
@@ -27,30 +29,36 @@ export default function ChildCard({ child }) {
                             label="DNI"
                         />
 
-                        <DateTimePickerWrapper 
+                        <DatePickerWrapper
                             label="Fecha de Nacimiento"
+                            valueCallBack = {(date) => { console.log(date) }}
+                            startValue = { child.birthday }
+                        />
+                        
+                        <ComboBox value={child.blood_type_id} />            
 
+                        <TagsInput
+                                selectedTags={(allergy) => { setAllergies(allergy) } }
+                                fullWidth
+                                variant="outlined"
+                                id="tags"
+                                name="tags"
+                                placeholder="agregar"
+                                label="Alergias"  
+                                tags={allergies}                              
+                        />
+
+                        <TagsInput
+                                selectedTags={(diseases) => { setCronicDisease(diseases) } }
+                                fullWidth
+                                variant="outlined"
+                                id="tags"
+                                name="tags"
+                                placeholder="agregar"
+                                label="Enfermedades Crónicas"  
+                                tags={cronicDisease}                              
                         />
                         
-                        <ComboBox value={child.blood_type_id} />
-                        
-                        <TextField 
-                            fullWidth
-                            autoComplete="alergies"
-                            type="text"      
-                            value = {allergies}
-                            onChange={(event) => { setAllergies(event.target.value) } }                      
-                            label="Alergias"
-                        />
-                        
-                        <TextField 
-                            fullWidth
-                            autoComplete="cronic disease"
-                            type="text"
-                            value = {cronicDisease}
-                            onChange={(event) => { setCronicDisease(event.target.value) } }  
-                            label="Enfermedades Crónicas"
-                        />
                     </Stack>
                 </CardContent>
                 <CardActions disableSpacing >

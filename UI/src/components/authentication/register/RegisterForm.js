@@ -46,7 +46,8 @@ export default function RegisterForm() {
         dni: getFieldProps('dni').value,
         phone: getFieldProps('phone').value,
         mail: getFieldProps('email').value,
-        password: getFieldProps('password').value
+        password: getFieldProps('password').value,
+        picture: '/static/mock-images/avatars/avatar_1.jpg'
       }
       fetch("http://localhost:3000/api/users/register", {
         method: "POST",

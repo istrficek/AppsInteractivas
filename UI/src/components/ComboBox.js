@@ -37,7 +37,7 @@ export default function ComboBox({ value }) {
                 <MenuItem value={-1}>Seleleccionar</MenuItem>
                 { elements.map((bloodType, i) => {
                     return (
-                        <MenuItem value={bloodType.id}>{bloodType.description}</MenuItem>
+                        <MenuItem key={i} value={bloodType.id}>{bloodType.description}</MenuItem>
                     )
                 }) }             
             </Select>

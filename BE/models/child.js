@@ -23,6 +23,7 @@ module.exports = (sequelize, DataTypes) => {
     name: DataTypes.STRING,
     last_name: DataTypes.STRING,
     dni: DataTypes.STRING,
+    birthday: DataTypes.DATE,
     blood_type_id: {
       type: DataTypes.INTEGER,
       references: {

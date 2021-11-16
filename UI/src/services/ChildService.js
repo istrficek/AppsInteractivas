@@ -1,7 +1,8 @@
+import { URLService } from "./URLService";
 
-export const getChilds = (url, userId) => {
+export const getChilds = (userId) => {
 
-    fetch(url + '/api/child/get/' + userId)
+    fetch(URLService.getChildsURL + userId)
         .then((response) => response.json())
         .then((data) => {          
             return data;

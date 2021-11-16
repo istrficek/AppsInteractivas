@@ -33,9 +33,9 @@ export default function CheckTable() {
                 </TableRow>
                 </TableHead>
                 <TableBody>
-                {rows.map((row) => (
+                {rows.map((row, id) => (
                     <TableRow
-                    key={row.name}
+                    key={id}
                     sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
                     >
                     <TableCell component="th" scope="row">

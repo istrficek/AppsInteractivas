@@ -13,7 +13,8 @@ module.exports = {
           dni: req.body.dni,
           phone: req.body.phone,
           mail: req.body.mail,
-          password: hashedPassword
+          password: hashedPassword,
+          picture: req.body.picture
         })
         .then((user) => res.status(200).send(user))
         .catch((error) => res.status(400).send(error));
@@ -48,5 +49,5 @@ module.exports = {
           res.status(200).send({error: 'Usuario o contraseña incorrectos'})          
         })
         .catch((error) => res.status(400).send(error));
-    }
+    },
   };

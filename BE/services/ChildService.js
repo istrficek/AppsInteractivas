@@ -5,12 +5,21 @@ module.exports = {
     getAll() {
         return Child.findAll({include: [{ all: true, nested: true }]})
     },
-    getSons(req) {
+    getSons(id) {
         return ChildOf
-            .findOne({
+            .findAll({                
                 include: [{ all: true, nested: true }],
                 where: {
-                user_id: req.params.id,
+                user_id: id,
+                },
+            })
+    },
+    getSonsId(id) {
+        return ChildOf
+            .findAll({
+                attributes: ['child_id'],
+                where: {
+                user_id: id,
                 },
             })
     }

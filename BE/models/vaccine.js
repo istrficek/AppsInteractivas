@@ -7,7 +7,12 @@ const child = require('./child');
 module.exports = (sequelize, DataTypes) => {
   class vaccine extends Model {
 
-    static associate(models) {}
+    static associate(models) {
+      vaccine.belongsTo(models.child, {
+        as: "child",
+        foreignKey: "child_id",
+      });
+    }
   };
   vaccine.init({
     child_id: {

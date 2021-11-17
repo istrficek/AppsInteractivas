@@ -6,7 +6,7 @@ import { useNavigate } from 'react-router-dom';
 const RootStyle = styled(Card)(({theme}) => ({
   boxShadow: 'none',
   textAlign: 'center',
-  padding: theme.spacing(3,0),
+  padding: theme.spacing(4,0),
   color: theme.palette.info.darker,
   backgroundColor: theme.palette.info.lighter
 }));
@@ -34,11 +34,12 @@ const DateWrapperStyle = styled('div')(({ theme }) => ({
     backgroundColor: `${alpha(theme.palette.info.dark, 0.1)}` 
   }));
 
-export default function AppNextAppointment({ text, date, icon, url }) {
+export default function AppNextAppointment({ text, date, icon, url, name }) {
   const navigate = useNavigate();
 
   return (
     <RootStyle>
+      { console.log(date) }
       <IconWrapperStyle>
         <Grid container spacing={0}>
             <Grid item xs={12} sm={12} md={12}>
@@ -49,19 +50,27 @@ export default function AppNextAppointment({ text, date, icon, url }) {
                     {text}
                 </Typography>
             </Grid>
+            { date !== undefined && (
+              <Grid item xs={12} sm={12} md={12}>
+                <Typography sx={{ mb:1 }} variant="h6">
+                    {name}
+                </Typography>
+              </Grid>
+            )}            
         </Grid>
       </IconWrapperStyle>
       <DateWrapperStyle>
         <Grid container spacing={0}>
+            { date === undefined && <Typography variant="h4" sx={{ opacity: 0.72, width: '100%' }}> Sin próximos turnos </Typography> }
             <Grid item xs={12} sm={12} md={12}>
-                <Typography variant="h3" sx={{ opacity: 0.72 }}> {date.day} </Typography>
+                <Typography variant="h3" sx={{ opacity: 0.72 }}> {date?.day} </Typography>
             </Grid>
             <Grid item xs={12} sm={12} md={12}>
-                <Typography variant="h4" sx={{ opacity: 0.72 }}> {date.month} </Typography>
+                <Typography variant="h4" sx={{ opacity: 0.72 }}> {date?.month} </Typography>
             </Grid>
         </Grid>
       </DateWrapperStyle>
-      <Button variant="contained" color="primary" onClick={()=>{navigate(url, { replace: true });}}>
+      <Button disabled={ date === undefined }  variant="contained" color="primary" onClick={()=>{navigate(url, { replace: true });}}>
         Ver
       </Button>
     </RootStyle>

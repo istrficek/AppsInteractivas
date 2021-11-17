@@ -7,7 +7,7 @@ module.exports = {
             .catch((error) => {res.status(200).send({error: error})})        
     },
     getSons(req, res) {
-        Service.getSons(req)
+        Service.getSons(req.params.id)
             .then((childrens) => {res.status(200).send(childrens)})
             .catch((error) => {res.status(200).send({error: error})}) 
     }

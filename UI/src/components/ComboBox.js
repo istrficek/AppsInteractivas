@@ -1,3 +1,4 @@
+import React from "react";
 import { FormControl, InputLabel, MenuItem, Select } from "@mui/material";
 import { useContext, useEffect, useState } from "react";
 import { DataContext } from "src/context";
@@ -7,8 +8,8 @@ export default function ComboBox({ value }) {
     const [elements, setElements] = useState([]);
     const { url } = useContext(DataContext);
 
-    const handleChange = (val) => {
-        setVal(val);
+    const handleChange = (e) => {
+        setVal(e.target.value);        
     }
 
     const getBloodTypes = () => {
@@ -16,6 +17,7 @@ export default function ComboBox({ value }) {
             .then((response) => response.json())
             .then((data) => {
                 setElements(data);
+                console.log(val);
             })
             .catch((error) => { console.log(error) });
     }
@@ -31,6 +33,7 @@ export default function ComboBox({ value }) {
                 labelId="demo-simple-select-label"
                 id="demo-simple-select"
                 value={val}
+                defaultValue={-1}
                 label="Grupo Sanguineo"
                 onChange={handleChange}
             >

@@ -6,11 +6,13 @@ import { useContext, useState } from "react";
 import { DataContext } from '../context'
 import FileUploadModal from "src/components/FileUploadModal";
 import { uploadImage } from '../services/UserService'; 
+import { useNavigate } from "react-router";
 
 
 export default function Profile() {
     const { currentUser } = useContext(DataContext);
     const [ openModal, setOpenModal ] = useState(false);
+    const navigate = useNavigate();
 
     const handleSelectedImage = async function(img) {
         let archivoOrig = img.name;
@@ -126,7 +128,7 @@ export default function Profile() {
                             )
                         }) }
                         <Grid item xs={12} sm={12} md={6} lg={4} xl={4}>
-                            <Button size="large" variant="contained" >+ Agregar Hijo</Button>                            
+                            <Button size="large" variant="contained" onClick={ () => { navigate("/main/agregarHijo", { replace: true } ) } } >+ Agregar Hijo</Button>                            
                         </Grid>
                     </Grid> 
                 </Stack>

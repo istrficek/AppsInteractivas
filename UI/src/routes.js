@@ -17,6 +17,7 @@ import StudiesResult from './pages/StudiesResult';
 import Percentiles from './pages/Percentiles';
 import PrivateRoute from './components/authentication/PrivateRoute';
 import NewCheck from './pages/NewCheck';
+import NewChild from './pages/NewChild';
 
 // ----------------------------------------------------------------------
 
@@ -36,6 +37,7 @@ export default function Router() {
         { path: 'controles/nuevo', element: <NewCheck /> },
         { path: 'estudios/resultado/:id', element: <StudiesResult /> },        
         { path: 'perfil', element: <Profile /> },
+        { path: 'agregarHijo', element: <NewChild /> },
         { path: '*', element: <Navigate to="/404" replace /> }
       ]
     },

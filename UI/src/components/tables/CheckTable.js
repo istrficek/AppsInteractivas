@@ -7,16 +7,7 @@ import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 
-function createData(date, height, weight, head, med, dosis, periodo, study) {
-  return { date, height, weight, head, med, dosis, periodo, study};
-}
-
-const rows = [
-  createData('04 Marzo 2021', '76 Cm', '5 Kg', '19 cm', 'Ibuprofeno', '1 ml', '2 Días', 'No'),
-  createData('20 Junio 2021', '95 Cm', '8 Kg', '21 cm', 'No', '-', '-', 'Sangre Completo'),  
-];
-
-export default function CheckTable() {
+export default function CheckTable({ history }) {
     return(
         <TableContainer component={Paper}>
             <Table sx={{ minWidth: 650 }} aria-label="simple table">
@@ -33,21 +24,21 @@ export default function CheckTable() {
                 </TableRow>
                 </TableHead>
                 <TableBody>
-                {rows.map((row, id) => (
+                {history.map((row, id) => (
                     <TableRow
                     key={id}
                     sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
                     >
                     <TableCell component="th" scope="row">
-                        {row.date}
+                        {new Date(row.date).toLocaleString()}
                     </TableCell>
-                    <TableCell align="right">{row.height}</TableCell>
-                    <TableCell align="right">{row.weight}</TableCell>
-                    <TableCell align="right">{row.head}</TableCell>
-                    <TableCell align="right">{row.med}</TableCell>
-                    <TableCell align="right">{row.dosis}</TableCell>
-                    <TableCell align="right">{row.periodo}</TableCell>
-                    <TableCell align="right">{row.study}</TableCell>
+                    <TableCell align="right">{row.result.height + ' Mts'}</TableCell>
+                    <TableCell align="right">{row.result.weight + ' Kg'}</TableCell>
+                    <TableCell align="right">{row.result.head_size + ' Cm'}</TableCell>
+                    <TableCell align="right">{row.result.meds}</TableCell>
+                    <TableCell align="right">{row.result.dose}</TableCell>
+                    <TableCell align="right">{row.result.period}</TableCell>
+                    <TableCell align="right">{row.result.study}</TableCell>
                     </TableRow>
                 ))}
                 </TableBody>

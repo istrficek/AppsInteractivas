@@ -6,15 +6,35 @@ import {
   TextField
 } from '@mui/material';
 import { LoadingButton } from '@mui/lab';
+import DateTimePickerWrapper from 'src/components/DateTimePickerWrapper';
+import { useContext, useState } from 'react';
+import { URLService } from 'src/services/URLService';
+import { DataContext } from 'src/context';
 
 // ----------------------------------------------------------------------
 
-export default function NewCheckForm() {
-  const LoginSchema = Yup.object().shape({
-    date: Yup.date('Formato de fecha incorrecto').required('Fecha Requerida'),
-    time: Yup.string().required('Hora Requerida'),
-    doctor: Yup.string().required('Doctor Requerido')
+export default function NewCheckForm({ onFinish }) {
+  const [newDate, setNewDate] = useState(new Date())
+  const { currentChildId } = useContext(DataContext);
+
+  const LoginSchema = Yup.object().shape({    
+    address: Yup.string().required('Dirección Requerida'),
+    doctor: Yup.string().required('Pediatra Requerido')
   });
+
+  const dateTimeCallback = (date) => {
+    setNewDate(date);
+  }
+
+  const setNewCheck = async function(newCheck){
+    await fetch(URLService.setNewCheck, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(newCheck),
+      })
+  }
 
   const formik = useFormik({
     initialValues: {
@@ -23,7 +43,14 @@ export default function NewCheckForm() {
     },
     validationSchema: LoginSchema,
     onSubmit: () => {
-      console.log("Perfectirijillo")
+      let address = getFieldProps('address').value
+      let doctor = getFieldProps('doctor').value
+      let date = newDate
+      let child_id = currentChildId
+
+      setNewCheck({address, doctor, date, child_id})
+
+      onFinish();
     }
   });
 
@@ -33,22 +60,15 @@ export default function NewCheckForm() {
     <FormikProvider value={formik}>
       <Form autoComplete="off" noValidate onSubmit={handleSubmit}>
         <Stack spacing={3}>
-          <TextField
-            fullWidth
-            type="text"
-            label="Fecha"
-            {...getFieldProps('date')}
-            error={Boolean(touched.date && errors.date)}
-            helperText={touched.date && errors.date}
-          />
+          <DateTimePickerWrapper label='Fecha y Hora' errorMsg='La fecha debe ser posterior a la actual' valueCallBack={dateTimeCallback} />
 
           <TextField
             fullWidth
             type="text"
-            label="Hora"
-            {...getFieldProps('time')}          
-            error={Boolean(touched.time && errors.time)}
-            helperText={touched.time && errors.time}
+            label="Direccion"
+            {...getFieldProps('address')}          
+            error={Boolean(touched.address && errors.address)}
+            helperText={touched.address && errors.address}
           />
 
           <TextField

@@ -3,19 +3,32 @@ import { useFormik, Form, FormikProvider } from 'formik';
 // material
 import { Checkbox, Divider, FormControlLabel, Stack, TextField, Typography } from '@mui/material';
 import { LoadingButton } from '@mui/lab';
-import { useState } from 'react';
+import { useContext, useState } from 'react';
+import { DataContext } from 'src/context';
+import { URLService } from 'src/services/URLService';
 
 // ----------------------------------------------------------------------
 
-export default function CheckResultForm() {
+export default function CheckResultForm({ id, onFinish }) {
     const [showMeds, setShowMeds] = useState(false);
     const [showStudy, setShowStudy] = useState(false);
+    const { currentChildId } = useContext(DataContext);
 
   const LoginSchema = Yup.object().shape({
-    date: Yup.date('Formato de fecha incorrecto').required('Fecha Requerida'),
-    time: Yup.string().required('Hora Requerida'),
-    doctor: Yup.string().required('Doctor Requerido')
+    weight: Yup.number().typeError('Ingrese el peso en kilogramos').min(1.0, 'El peso debe ser mayor a 1 Kg').required('Peso Requerido'),
+    height: Yup.number().typeError('Ingrese la altura en metros').min(0.2, 'El la altura debe ser mayor a 0.2 Mts').required('Altura Requerido'),
+    headSize: Yup.number().typeError('Ingrese el diametro de la cabeza en centímetros').min(5, 'El diámetro de la cabeza debe ser mayor a 5 cm').required('Diámetro de Cabeza Requerido')
   });
+
+  const setCheckResult = async function(result){
+    await fetch(URLService.setCheckResult, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(result),
+      })
+  }
 
   const formik = useFormik({
     initialValues: {
@@ -24,7 +37,19 @@ export default function CheckResultForm() {
     },
     validationSchema: LoginSchema,
     onSubmit: () => {
-      console.log("Perfectirijillo")
+      let weight = getFieldProps('weight').value
+      let height = getFieldProps('height').value
+      let head_size = getFieldProps('headSize').value
+      let meds = getFieldProps('meds').value
+      let dose = getFieldProps('dose').value
+      let period = getFieldProps('period').value
+      let study = getFieldProps('study').value
+      let observations = getFieldProps('observations').value
+      let check_id = id
+
+      setCheckResult({weight, height, head_size, meds, dose, period, study, observations, check_id})
+
+      onFinish();
     }
   });
 
@@ -36,46 +61,6 @@ export default function CheckResultForm() {
     setShowStudy(event.target.checked);
   }
 
-  function Meds() {
-    return(
-        <>
-            <Typography variant="subtitle1"> Medicamentos </Typography>
-            <TextField
-                fullWidth
-                type="text"
-                label="Medicamento"
-            />
-            <TextField
-                fullWidth
-                type="text"
-                label="Dosis"
-            />
-            <TextField
-                fullWidth
-                type="text"
-                label="Período"
-            />
-            <Divider />
-        </>
-    )
-  }
-
-  function Study() {
-      return(
-          <>
-            <Typography variant="subtitle1"> Estudios </Typography>
-            <TextField
-                fullWidth
-                type="text"
-                label="Estudio"
-            />
-            <Divider />
-          </>
-      )
-  }
-
-
-
   const { errors, touched, isSubmitting, handleSubmit, getFieldProps } = formik;
 
   return (
@@ -85,7 +70,7 @@ export default function CheckResultForm() {
             <TextField
                 fullWidth
                 type="text"
-                label="Peso"
+                label="Peso (Kgr)"
                 {...getFieldProps('weight')}
                 error={Boolean(touched.weight && errors.weight)}
                 helperText={touched.weight && errors.weight}
@@ -94,7 +79,7 @@ export default function CheckResultForm() {
             <TextField
                 fullWidth
                 type="text"
-                label="Altura"
+                label="Altura (Mts)"
                 {...getFieldProps('height')}          
                 error={Boolean(touched.height && errors.height)}
                 helperText={touched.height && errors.height}
@@ -103,7 +88,7 @@ export default function CheckResultForm() {
             <TextField
                 fullWidth
                 type="text"
-                label="Diámetro Cabeza"
+                label="Diámetro Cabeza (Cms)"
                 {...getFieldProps('headSize')}          
                 error={Boolean(touched.headSize && errors.headSize)}
                 helperText={touched.headSize && errors.headSize}
@@ -113,14 +98,56 @@ export default function CheckResultForm() {
             label="Se Recetaron Medicamentos?"
           />
 
-          { showMeds && <Meds/> }
+          { showMeds && (
+            <>
+              <Typography variant="subtitle1"> Medicamentos </Typography>
+              <TextField
+                  fullWidth
+                  type="text"
+                  label="Medicamento"
+                  {...getFieldProps('meds')}          
+                  error={Boolean(touched.meds && errors.meds)}
+                  helperText={touched.meds && errors.meds}
+              />
+              <TextField
+                  fullWidth
+                  type="text"
+                  label="Dosis"
+                  {...getFieldProps('dose')}          
+                  error={Boolean(touched.dose && errors.dose)}
+                  helperText={touched.dose && errors.dose}
+              />
+              <TextField
+                  fullWidth
+                  type="text"
+                  label="Período"
+                  {...getFieldProps('period')}          
+                  error={Boolean(touched.period && errors.period)}
+                  helperText={touched.period && errors.period}
+              />
+              <Divider />
+            </>
+          ) }
 
           <FormControlLabel
             control={ <Checkbox name="study" onChange={handleChangeStudy} /> }
             label="Se Pidió Algún Estudio?"
           />
 
-          { showStudy && <Study /> }
+          { showStudy && (
+            <>
+              <Typography variant="subtitle1"> Estudios </Typography>
+              <TextField
+                  fullWidth
+                  type="text"
+                  label="Estudio"
+                  {...getFieldProps('study')}          
+                  error={Boolean(touched.study && errors.study)}
+                  helperText={touched.study && errors.study}
+              />
+              <Divider />
+            </>
+          ) }
 
           <TextField
             fullWidth

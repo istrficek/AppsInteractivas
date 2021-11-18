@@ -7,6 +7,18 @@ module.exports = {
     getAll() {
         return Check.findAll({include: [{ all: true, nested: true }]})
     },
+    getAllById(sons) {
+        return Check
+            .findAll({
+                include: [{ all: true }],
+                where: {
+                    [Op.and]: [
+                        { child_id: sons }, // child_id IN sons
+                        { finished: 1 } 
+                    ]
+                }
+            })
+    },
     getNextCheck(sons) {
         return Check.findOne({            
             order: [['date','asc']],
@@ -14,10 +26,43 @@ module.exports = {
             where: {
                 [Op.and]: [
                   { child_id: sons }, // child_id IN sons
-                  { date: { [Op.gt]: new Date() } } // date > today
+                  { finished: 0 } 
                 ]
               },              
         });
+    },
+    setCheckResult(result) {
+        return CheckResult
+            .create({
+                check_id: result.check_id,
+                dose: result.dose,
+                head_size: result.head_size,
+                height: result.height,
+                meds: result.meds,
+                observations: result.observations,
+                period: result.period,
+                study: result.study,
+                weight: result.weight,
+            })
+    },
+    markCheckAsFinished(id) {
+        return Check.update(
+            { finished: 1 }, 
+            {
+                where: {
+                id: id
+                }
+            });
+    },
+    saveNewCheck(check) {
+        return Check
+            .create({
+                date: check.date,
+                address: check.address,
+                doctor: check.doctor,
+                child_id: check.child_id,
+                finished: 0
+            })
     }
 }
 

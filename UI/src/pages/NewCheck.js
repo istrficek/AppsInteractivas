@@ -2,12 +2,12 @@ import { Card, CardHeader, CardContent, Container, Box, Icon, CardActions, Butto
 import { useContext } from "react";
 import { useNavigate, useParams } from "react-router";
 import CheckResultForm from "src/components/modals/forms/CheckResultForm";
+import NewCheckForm from "src/components/modals/forms/NewCheckForm";
 import Page from "src/components/Page";
 import { DataContext } from "src/context";
 
-export default function CheckResult (){
+export default function NewCheck (){
     const navigate = useNavigate();
-    let { id } = useParams();
     const { currentChildId } = useContext(DataContext);
 
     const handleReturn = () => {
@@ -15,15 +15,15 @@ export default function CheckResult (){
     }
 
     return(
-        <Page title="Resultado Control | Baby App">
+        <Page title="Nuevo Control | Baby App">
             <Container maxWidth="lg">                
                 <Card>
                     <CardActions>
                         <Button size='medium' onClick={handleReturn}>Volver</Button>
                     </CardActions>
-                    <CardHeader title="Subir Resultado de Control"></CardHeader>                
+                    <CardHeader title="Nuevo Turno Para Control"></CardHeader>                
                     <CardContent>
-                        <CheckResultForm id={id} onFinish={handleReturn} ></CheckResultForm>
+                        <NewCheckForm onFinish={handleReturn} ></NewCheckForm>
                     </CardContent>
                 </Card>
             </Container>

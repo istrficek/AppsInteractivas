@@ -25,9 +25,9 @@ module.exports = (sequelize, DataTypes) => {
         key: 'id',
       }
     },    
-    height: DataTypes.DECIMAL,
-    weight: DataTypes.DECIMAL,
-    head_size: DataTypes.DECIMAL,
+    height: DataTypes.DECIMAL(5,2),
+    weight: DataTypes.DECIMAL(5,2),
+    head_size: DataTypes.DECIMAL(5,2),
     meds: DataTypes.STRING,
     dose: DataTypes.STRING,
     period: DataTypes.STRING,

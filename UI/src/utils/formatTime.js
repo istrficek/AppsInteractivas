@@ -52,6 +52,15 @@ export function fDateTimeDayMonth(date) {
   return newDate;
 }
 
+export function fDateTimeToLongText(date) {
+  let d = new Date(date);
+
+  let text = d.getDate().toString().padStart(2,'0') + ' de ' + monthWord(d.getMonth()) + ' a las ' + d.getHours().toString().padStart(2,'0') + ':' + d.getMinutes().toString().padStart(2,'0');
+
+  return text;
+
+}
+
 export function fToNow(date) {
   return formatDistanceToNow(new Date(date), {
     addSuffix: true

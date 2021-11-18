@@ -1,28 +1,55 @@
 import { Button, Card, CardContent, CardHeader, Container, Divider, Grid, Typography } from "@mui/material";
-import { useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router";
-import ModalNewCheck from "src/components/modals/modalNewCheck";
 import NextAppointment from "src/components/NextAppointment";
 import Page from "src/components/Page";
 import CheckTable from "src/components/tables/CheckTable";
+import { DataContext } from "src/context";
+import { fDateTimeToLongText } from "src/utils/formatTime";
+import { URLService } from "../services/URLService";
 
-export default function Checks () {
-    const [openNewCheck, setOpenNewCheck] = useState(false)
+export default function Checks () {    
+    const [nextCheck, setNextCheck] = useState({})
+    const [checkHistory, setCheckHistory] = useState([])
+    const { setCurrentChildId } = useContext(DataContext); 
+    let { id } = useParams();
     const navigate = useNavigate();
 
-    const newCheckClose = () => {
-        setOpenNewCheck(false)
+    useEffect(() => {
+        fetchNextCheck(id);
+        fetchCheckHistory(id);
+        setCurrentChildId(id);
+    }, [])
+
+    const fetchNextCheck = async function(id) {
+        await fetch(URLService.getNextCheckURL + id)
+            .then((response) => response.json())
+            .then((next) => {
+                setNextCheck(next);
+            })
+            .catch((error) => {
+                console.log(error)
+            })
     }
 
-    const newCheckOpen = () => {
-        setOpenNewCheck(true);
+    const fetchCheckHistory = async function(id) {
+        await fetch(URLService.getCheckHistoryURL + id)
+            .then((response) => response.json())
+            .then((history) => {
+                setCheckHistory(history);
+            })
+            .catch((error) => console.log(error))
     }
 
-    const checkResultOpen = () => {
-        navigate("/main/controles/resultado/roberto", { replace: true } )
+    const checkResultOpen = (checkId) => {
+        navigate("/main/controles/resultado/" + checkId, { replace: true } )
     }
 
-    let { id } = useParams();
+    const NewCheckOpen = () => {
+        navigate("/main/controles/nuevo", { replace: true } );
+    }
+
+    
     return(
         <Page title="Controles | Baby App">
             <Container maxWidth="lg">
@@ -30,15 +57,15 @@ export default function Checks () {
                     <Grid item xs={12} sm={12} md={12}>
                         <NextAppointment 
                             title="Próximo Control Médico" 
-                            date="24 de Agosto a las 15:30"
-                            location="Corrientes 2241 '2 B'"
-                            doctor="Dra. Micaela Massa"
+                            date={ fDateTimeToLongText(nextCheck?.date) }
+                            location={ nextCheck?.address }
+                            doctor= { nextCheck?.doctor }
                             buttonText="Subir Resultado"
-                            buttonPress={checkResultOpen}
+                            buttonPress={() => checkResultOpen(nextCheck?.id)}
                         />
                     </Grid>
                     <Grid item xs={12} sm={12} md={12}>
-                        <Button variant="contained" size="large" onClick={newCheckOpen}>
+                        <Button variant="contained" size="large" onClick={NewCheckOpen}>
                             Programar Nuevo Control
                         </Button>
                     </Grid>
@@ -49,15 +76,14 @@ export default function Checks () {
                 <Grid container>
                     <Grid item xs={12}>
                         <Card>
-                            <CardHeader title="Estudios Realizados" />
+                            <CardHeader title="Controles Realizados" />
                             <CardContent>
-                                <CheckTable />
+                                <CheckTable history={checkHistory} />
                             </CardContent>
                         </Card>                        
                     </Grid>
                 </Grid>
-            </Container>         
-            <ModalNewCheck open={openNewCheck} close={()=>newCheckClose()}></ModalNewCheck>            
+            </Container>                               
         </Page>
     )
 }

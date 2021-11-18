@@ -16,12 +16,17 @@ module.exports = (sequelize, DataTypes) => {
         as: "child",
         foreignKey: "child_id",
       });
+      check.hasOne(models.check_result, {
+        as:'result',
+        foreignKey: 'check_id'
+      })
     }
   };
   check.init({
     date: DataTypes.DATE,
     address: DataTypes.STRING,
     doctor: DataTypes.STRING,
+    finished: DataTypes.BOOLEAN,
     child_id: {
       type: DataTypes.INTEGER,
       references: {

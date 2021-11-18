@@ -57,31 +57,35 @@ export default function NextAppointment({ title, date, location, doctor, study, 
                 </Typography>
             </TitleWrapperStyle>
             <DateWrapperStyle>
-                <Stack spacing={2}>
-                    <Stack direction="row" spacing={2}>
-                        <Icon icon={clockOutline} width={20} height={25} />
-                        <Typography variant="h6">
-                            {date}
-                        </Typography>
+                { location !== undefined && (
+                    <Stack spacing={2}>
+                        <Stack direction="row" spacing={2}>
+                            <Icon icon={clockOutline} width={20} height={25} />
+                            <Typography variant="h6">
+                                {date}
+                            </Typography>
+                        </Stack>
+                        <Stack direction="row" spacing={2}>
+                            <Icon icon={mapOutline} width={20} height={25} />
+                            <Typography variant="h6">
+                                {location}
+                            </Typography>
+                        </Stack>
+                        <Stack direction="row" spacing={2}>
+                            <Icon icon={doctorIcon} width={20} height={25} />
+                            <Typography variant="h6">
+                                {doctor} 
+                            </Typography>
+                        </Stack>
+                        {study && <Stack direction="row" spacing={2}> <Icon icon={fileTextFill} width={20} height={25} /> <Typography variant="h6"> {study}  </Typography> </Stack> }
+                        {vaccine && <Stack direction="row" spacing={2}> <Icon icon={vaccineIcon} width={20} height={25} /> <Typography variant="h6"> {vaccine}  </Typography> </Stack> }               
                     </Stack>
-                    <Stack direction="row" spacing={2}>
-                        <Icon icon={mapOutline} width={20} height={25} />
-                        <Typography variant="h6">
-                            {location}
-                        </Typography>
-                    </Stack>
-                    <Stack direction="row" spacing={2}>
-                        <Icon icon={doctorIcon} width={20} height={25} />
-                        <Typography variant="h6">
-                            {doctor} 
-                        </Typography>
-                    </Stack>
-                    {study && <Stack direction="row" spacing={2}> <Icon icon={fileTextFill} width={20} height={25} /> <Typography variant="h6"> {study}  </Typography> </Stack> }
-                    {vaccine && <Stack direction="row" spacing={2}> <Icon icon={vaccineIcon} width={20} height={25} /> <Typography variant="h6"> {vaccine}  </Typography> </Stack> }               
-                </Stack>
+                )}
+                { location === undefined && <Typography variant="h4">Sin Próximos Turnos</Typography> }
+                
             </DateWrapperStyle>
             <ResultsButtonStyle>
-                <Button color="secondary" variant="contained" onClick={()=>buttonPress()}>{buttonText}</Button>   
+                <Button disabled={ location === undefined } color="secondary" variant="contained" onClick={()=>buttonPress()}>{buttonText}</Button>   
             </ResultsButtonStyle>                  
         </RootStyle>
     )

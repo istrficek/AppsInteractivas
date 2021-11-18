@@ -16,6 +16,7 @@ import Profile from './pages/Profile';
 import StudiesResult from './pages/StudiesResult';
 import Percentiles from './pages/Percentiles';
 import PrivateRoute from './components/authentication/PrivateRoute';
+import NewCheck from './pages/NewCheck';
 
 // ----------------------------------------------------------------------
 
@@ -32,7 +33,8 @@ export default function Router() {
         { path: 'vacunas/:id', element: <Vaccines /> },
         { path: 'percentiles/:id', element: <Percentiles /> },
         { path: 'controles/resultado/:id', element: <CheckResult /> },
-        { path: 'estudios/resultado/:id', element: <StudiesResult /> },
+        { path: 'controles/nuevo', element: <NewCheck /> },
+        { path: 'estudios/resultado/:id', element: <StudiesResult /> },        
         { path: 'perfil', element: <Profile /> },
         { path: '*', element: <Navigate to="/404" replace /> }
       ]

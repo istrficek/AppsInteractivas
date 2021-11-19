@@ -32,7 +32,7 @@ export default function CheckResultForm({ id, onFinish }) {
 
   const uploadImage = async function(file, name){
     try{
-        let url = URLService.uploadStudyImageURL;
+        let url = URLService.uploadImageURL;
         const formData = new FormData;
         formData.append('files', file, name);
 

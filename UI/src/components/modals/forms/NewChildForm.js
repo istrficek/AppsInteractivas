@@ -15,7 +15,7 @@ import DatePickerWrapper from 'src/components/DatePickerWrapper';
 import ComboBox from 'src/components/ComboBox';
 import TagsInput from 'src/components/TagsInput';
 import FileUploadModal from 'src/components/FileUploadModal';
-import { uploadImage } from 'src/services/UserService';
+import { uploadImage } from 'src/services/FileService';
 
 // ----------------------------------------------------------------------
 
@@ -45,7 +45,7 @@ export default function NewChildForm({ onFinish }) {
     let random = Math.random().toString().substring(2,15);
     let fileName = "img" + "_" + currentUser.id + "_" + random + extension;
 
-    let response = await uploadImage(img, fileName, currentUser.id);
+    let response = await uploadImage(img, fileName);
 
     setPicture(response.files);
 

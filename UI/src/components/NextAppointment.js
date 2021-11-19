@@ -6,6 +6,8 @@ import mapOutline from '@iconify/icons-eva/map-outline';
 import doctorIcon from '@iconify/icons-healthicons/doctor';
 import vaccineIcon from '@iconify/icons-ic/outline-vaccines';
 import fileTextFill from '@iconify/icons-eva/file-text-fill';
+import { LoadingButton } from '@mui/lab';
+import { useState } from 'react';
 
 const RootStyle = styled(Card)(({theme}) => ({
     boxShadow: 'none',
@@ -48,7 +50,7 @@ const RootStyle = styled(Card)(({theme}) => ({
         //color: `${alpha(theme.palette.info.dark, 0.7)}`,        
       }));
 
-export default function NextAppointment({ title, date, location, doctor, study, vaccine, buttonText, buttonPress }) {
+export default function NextAppointment({ title, date, location, doctor, study, vaccine, buttonText, buttonPress, loading }) {
     return(
         <RootStyle>
             <TitleWrapperStyle>
@@ -85,7 +87,7 @@ export default function NextAppointment({ title, date, location, doctor, study, 
                 
             </DateWrapperStyle>
             <ResultsButtonStyle>
-                <Button disabled={ location === undefined } color="secondary" variant="contained" onClick={()=>buttonPress()}>{buttonText}</Button>   
+                <LoadingButton loading={loading} disabled={ location === undefined } color="secondary" variant="contained" onClick={()=>buttonPress()}>{buttonText}</LoadingButton>   
             </ResultsButtonStyle>                  
         </RootStyle>
     )

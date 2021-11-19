@@ -6,18 +6,8 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
-import { Button } from '@mui/material';
 
-function createData(name, dosis, date, place) {
-  return { name, dosis, date, place};
-}
-
-const rows = [
-  createData('Pentavalente', '1° Dosis', '05 Enero 2021', 'Vacunatorio San Miguel'),
-  createData('Rotavirus','Monodosis', '13 Enero 2021', 'Vacunatorio San Miguel'),
-];
-
-export default function VaccineTable() {
+export default function VaccineTable({ history }) {
     return(
         <TableContainer component={Paper}>
             <Table sx={{ minWidth: 650 }} aria-label="simple table">
@@ -30,17 +20,17 @@ export default function VaccineTable() {
                 </TableRow>
                 </TableHead>
                 <TableBody>
-                {rows.map((row) => (
+                {history.map((row) => (
                     <TableRow
-                    key={row.name}
+                    key={row.description}
                     sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
                     >
                     <TableCell component="th" scope="row">
-                        {row.name}
+                        {row.description}
                     </TableCell>
                     <TableCell align="right">{row.dosis}</TableCell>
                     <TableCell align="right">{row.date}</TableCell>
-                    <TableCell align="right">{row.place}</TableCell>
+                    <TableCell align="right">{row.address}</TableCell>
                     </TableRow>
                 ))}
                 </TableBody>

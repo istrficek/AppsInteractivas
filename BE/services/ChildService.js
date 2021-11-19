@@ -5,6 +5,12 @@ module.exports = {
     getAll() {
         return Child.findAll({include: [{ all: true, nested: true }]})
     },
+    getById(id) {
+        return Child.findOne({
+            include: [{ all: true }],
+            where: { id:id }
+        })
+    },
     getSons(id) {
         return ChildOf
             .findAll({                

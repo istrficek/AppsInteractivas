@@ -2,6 +2,7 @@ const Sequelize = require("sequelize");
 var bcrypt = require('bcryptjs');
 var jwt = require('jsonwebtoken');
 const User = require('../models').user;
+const UserService = require('../services/UserService');
 
 module.exports = {  
     create(req, res) {
@@ -62,6 +63,14 @@ module.exports = {
         .catch((error) => { 
           console.log('Error getting user' + error);
           res.status(200).send({error: 'Error obteniendo usuario'})   
+        })
+    },
+    updateImage(req, res) {
+      UserService.updateImage(req.body)
+        .then((success) => { res.status(200).send({status: 'Success'}) })
+        .catch((error) => {
+          console.log(error);
+          res.status(200).send({status: 'Error', message: error});
         })
     }
   };

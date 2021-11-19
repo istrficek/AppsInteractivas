@@ -2,7 +2,6 @@ const baseURL = 'http://127.0.0.1:3000'
 
 export const URLService = {
     uploadImageURL: baseURL + "/api/file/upload",
-    uploadStudyImageURL: baseURL + "/api/file/uploadStudy",
     getChildsURL: baseURL + '/api/child/get/',
     getDashboardURL: baseURL + '/api/dashboard/get/',
     getNextCheckURL: baseURL + '/api/check/getNext/',
@@ -15,4 +14,10 @@ export const URLService = {
     getStudyHistoryURL: baseURL + '/api/study/getHistory/',
     setNewStudy: baseURL + '/api/study/new',
     setStudyResult: baseURL + '/api/study/result',
+    updateUserPictureURL: baseURL + '/api/users/updatePicture',
+    getNextVaccineURL: baseURL + '/api/vaccine/getNext/',
+    getVaccineHistoryURL: baseURL + '/api/vaccine/getHistory/',
+    setNewVaccine: baseURL + '/api/vaccine/new',
+    setVaccineResult: baseURL + '/api/vaccine/result/',
+    getVaccineRecommendationsURL: baseURL + '/api/vaccine/recommendations/',
 }

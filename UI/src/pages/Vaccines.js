@@ -1,24 +1,83 @@
 import { Container, Grid, Button, Divider, Card, CardHeader, CardContent } from "@mui/material";
-import { useState } from "react";
+import { useContext, useEffect, useState } from "react";
+import { useNavigate, useParams } from "react-router";
 import ModalNewVaccine from "src/components/modals/ModalNewVaccine";
 import NextAppointment from "src/components/NextAppointment";
 import NextVaccines from "src/components/NextVaccines";
 import Page from "src/components/Page";
 import VaccineTable from "src/components/tables/VaccinesTable";
+import { DataContext } from "src/context";
+import { URLService } from "src/services/URLService";
+import { fDateTimeToLongText } from "src/utils/formatTime";
 
 export default function Vaccines() {
-    const [openNewVaccine, setOpenNewVaccine] = useState(false)
+    const navigate = useNavigate();
+    const [nextVaccine, setNextVaccine] = useState({})
+    const [vaccineHistory, setVaccineHistory] = useState([])
+    const [loading, setLoading] = useState(false)
+    const [vaccineRecommentadion, setVaccineRecommentadion] = useState([])
+    const { setCurrentChildId } = useContext(DataContext);
+    let { id } = useParams();
 
-    const newVaccineClose = () => {
-        setOpenNewVaccine(false)
+    useEffect(() => {
+        fetchNextVaccine(id);
+        fetchVaccineHistory(id);
+        fetchVaccineRecommendations(id)
+        setCurrentChildId(id);
+    }, [])
+
+    const fetchNextVaccine = async function(id) {
+        await fetch(URLService.getNextVaccineURL + id)
+            .then((response) => response.json())
+            .then((next) => {
+                setNextVaccine(next);
+            })
+            .catch((error) => {
+                console.log(error)
+            })
     }
 
-    const handleNewVaccineButtonPress = () => {
-        setOpenNewVaccine(true);
+    const fetchVaccineRecommendations = async function(id) {
+        await fetch(URLService.getVaccineRecommendationsURL + id)
+            .then((response) => response.json())
+            .then((vr) => {
+                setVaccineRecommentadion(vr);
+            })
+            .catch((error) => {
+                console.log(error)
+            })
     }
 
-    const handleNextAppointmentButtonPress = () => {
-        
+    const updateStatus = async function() {
+        await fetch(URLService.setVaccineResult + nextVaccine.id)
+            .then((response) => response.json())
+            .then((next) => {
+                setLoading(false);
+                fetchNextVaccine(id);
+                fetchVaccineHistory(id);
+            })
+            .catch((error) => {
+                console.log(error);                
+                setLoading(false);
+            })
+    }
+
+    const fetchVaccineHistory = async function(id) {
+        await fetch(URLService.getVaccineHistoryURL + id)
+            .then((response) => response.json())
+            .then((history) => {
+                setVaccineHistory(history);
+            })
+            .catch((error) => console.log(error))
+    }
+
+    const NewVaccineOpen = () => {
+        navigate("/main/vacunas/nueva", { replace: true } );
+    }
+
+    const updateVaccineStatus = () => {
+        setLoading(true);
+        updateStatus();
     }
 
     return (
@@ -28,16 +87,17 @@ export default function Vaccines() {
                     <Grid item xs={12} sm={12} md={12}>
                         <NextAppointment 
                             title="Próxima Vacuna" 
-                            date="2 de Julio a las 10:00"
-                            location="Vacunatorio San Miguel"
-                            doctor="Dr. Luis Pedraza"
-                            vaccine="Rubeola 1° dósis"
+                            date={ fDateTimeToLongText(nextVaccine?.date) }
+                            location={nextVaccine?.address}
+                            doctor={nextVaccine?.doctor}
+                            vaccine={ nextVaccine?.description + ' ' + nextVaccine?.dosis }
                             buttonText="Marcar Como Recibida"
-                            buttonPress={handleNextAppointmentButtonPress}
+                            loading = {loading}
+                            buttonPress={updateVaccineStatus}
                         />
                     </Grid>
                     <Grid item xs={12} sm={12} md={12}>
-                        <Button variant="contained" size="large" onClick={handleNewVaccineButtonPress}>
+                        <Button variant="contained" size="large" onClick={NewVaccineOpen}>
                             Programar Vacunación
                         </Button>
                     </Grid>
@@ -47,7 +107,7 @@ export default function Vaccines() {
             <Container maxWidth="md">
                 <Grid container>
                     <Grid item xs={12}>
-                        <NextVaccines />
+                        <NextVaccines recommendations={vaccineRecommentadion} />
                     </Grid>
                 </Grid>
             </Container>
@@ -58,13 +118,12 @@ export default function Vaccines() {
                         <Card>
                             <CardHeader title="Vacunas Administradas" />
                             <CardContent>
-                                <VaccineTable />
+                                <VaccineTable history={vaccineHistory} />
                             </CardContent>
                         </Card>  
                     </Grid>
                 </Grid>
-            </Container>
-            <ModalNewVaccine open={openNewVaccine} close={()=>newVaccineClose()}></ModalNewVaccine>    
+            </Container>            
         </Page>
     )
 } 

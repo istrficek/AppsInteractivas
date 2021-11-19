@@ -19,6 +19,7 @@ import PrivateRoute from './components/authentication/PrivateRoute';
 import NewCheck from './pages/NewCheck';
 import NewChild from './pages/NewChild';
 import NewStudy from './pages/NewStudy';
+import NewVaccine from './pages/NewVaccine';
 
 // ----------------------------------------------------------------------
 
@@ -33,6 +34,7 @@ export default function Router() {
         { path: 'controles/:id', element: <Checks /> },
         { path: 'estudios/:id', element: <Studies /> },
         { path: 'vacunas/:id', element: <Vaccines /> },
+        { path: 'vacunas/nueva', element: <NewVaccine /> },
         { path: 'percentiles/:id', element: <Percentiles /> },
         { path: 'controles/resultado/:id', element: <CheckResult /> },
         { path: 'controles/nuevo', element: <NewCheck /> },

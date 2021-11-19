@@ -1,10 +1,10 @@
 const User = require('../models').user
 
 module.exports = {
-    updateImage(pic, id) {
-        return User.update({ picture: pic }, {
+    updateImage(newPic) {
+        return User.update({ picture: newPic.pic }, {
             where: {
-              id: id
+              id: newPic.id
             }
           });
     }

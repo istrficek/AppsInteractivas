@@ -5,12 +5,13 @@ import ChildCard from "src/components/profile/ChildCard";
 import { useContext, useState } from "react";
 import { DataContext } from '../context'
 import FileUploadModal from "src/components/FileUploadModal";
-import { uploadImage } from '../services/UserService'; 
+import { uploadImage } from '../services/FileService'; 
 import { useNavigate } from "react-router";
+import { URLService } from "src/services/URLService";
 
 
 export default function Profile() {
-    const { currentUser } = useContext(DataContext);
+    const { currentUser, setCurrentUser } = useContext(DataContext);
     const [ openModal, setOpenModal ] = useState(false);
     const [ name, setName ] = useState(currentUser.name);
     const [ lastName, setLastname ] = useState(currentUser.last_name);
@@ -18,7 +19,31 @@ export default function Profile() {
     const [ mail, setMail ] = useState(currentUser.mail);
     const [ phone, setPhone ] = useState(currentUser.phone);
     const [ address, setAddress ] = useState(currentUser.address);
+    const [ picture, setPicture ] = useState(currentUser.picture);
     const navigate = useNavigate();
+
+    const updateUser = async function() {
+        await fetch(URLService.getUserByIdURL + currentUser.id)
+            .then((response) => response.json())
+            .then((user) => { 
+                setCurrentUser(user);
+                setOpenModal(false);
+            })
+            .catch((error) => { console.log(error) })
+    }
+
+    const updateUserImage = async function(url) {
+        await fetch(URLService.updateUserPictureURL, {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({pic: url, id: currentUser.id}),
+          })
+          .then((success) => {
+            updateUser();            
+          })
+    }
 
     const handleSelectedImage = async function(img) {
         let archivoOrig = img.name;
@@ -28,8 +53,10 @@ export default function Profile() {
         let fileName = "img" + "_" + currentUser.id + "_" + random + extension;
 
         let imageURL = await uploadImage(img, fileName, currentUser.id);
-        
-        console.log(imageURL)
+    
+        updateUserImage(imageURL.files)
+
+        setPicture(imageURL.files);            
     }
 
     return (
@@ -39,7 +66,7 @@ export default function Profile() {
                     <Grid container spacing={4} alignItems="center" >
                         <Grid item>
                             <Stack>
-                                <Avatar sx={{ width: 150, height: 150 }} src={currentUser.picture} alt="photoURL" />
+                                <Avatar sx={{ width: 150, height: 150 }} src={picture} alt="photoURL" />
                                 <div onClick={ () => { setOpenModal(true) } } >
                                     <Link sx={{ pl:4.5 }} href="#" underline="always" variant="caption">
                                         {"Cambiar Foto"}

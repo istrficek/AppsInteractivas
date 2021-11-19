@@ -72,5 +72,15 @@ module.exports = {
           console.log(error);
           res.status(200).send({status: 'Error', message: error});
         })
+    },
+    getByDNI(req,res) {
+      UserService.getByDNI(req.params.dni)
+        .then((result) => {
+          if(result === null) {
+            res.status(200).send({status: 'Ok', found: false});
+          } else {
+            res.status(200).send({status: 'Ok', found: true});
+          }
+        })
     }
   };

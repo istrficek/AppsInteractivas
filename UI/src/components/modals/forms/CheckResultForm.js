@@ -15,7 +15,7 @@ export default function CheckResultForm({ id, onFinish }) {
 
   const LoginSchema = Yup.object().shape({
     weight: Yup.number().typeError('Ingrese el peso en kilogramos').min(1.0, 'El peso debe ser mayor a 1 Kg').required('Peso Requerido'),
-    height: Yup.number().typeError('Ingrese la altura en metros').min(0.2, 'El la altura debe ser mayor a 0.2 Mts').required('Altura Requerido'),
+    height: Yup.number().typeError('Ingrese la altura en centimetros').min(40, 'El la altura debe ser mayor a 40 Cm').required('Altura Requerido'),
     headSize: Yup.number().typeError('Ingrese el diametro de la cabeza en centímetros').min(5, 'El diámetro de la cabeza debe ser mayor a 5 cm').required('Diámetro de Cabeza Requerido')
   });
 
@@ -78,7 +78,7 @@ export default function CheckResultForm({ id, onFinish }) {
             <TextField
                 fullWidth
                 type="text"
-                label="Altura (Mts)"
+                label="Altura (Cm)"
                 {...getFieldProps('height')}          
                 error={Boolean(touched.height && errors.height)}
                 helperText={touched.height && errors.height}

@@ -7,5 +7,12 @@ module.exports = {
               id: newPic.id
             }
           });
+    },
+    getByDNI(dni) {
+      return User.findOne({
+        where: {
+          dni: dni
+        }
+      })
     }
 }

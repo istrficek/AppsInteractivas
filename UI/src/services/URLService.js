@@ -20,4 +20,6 @@ export const URLService = {
     setNewVaccine: baseURL + '/api/vaccine/new',
     setVaccineResult: baseURL + '/api/vaccine/result/',
     getVaccineRecommendationsURL: baseURL + '/api/vaccine/recommendations/',
+    getPercentilesURL: baseURL + '/api/percentile/get/',
+    getUserByDNIURL: baseURL + '/api/users/getByDNI/',
 }

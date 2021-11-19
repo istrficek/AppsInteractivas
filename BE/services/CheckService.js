@@ -2,6 +2,7 @@ const Check = require('../models').check
 const CheckResult = require('../models').check_result
 
 const { Op } = require("sequelize");
+const sequelize = require("sequelize");
 
 module.exports = {
     getAll() {
@@ -63,6 +64,28 @@ module.exports = {
                 child_id: check.child_id,
                 finished: 0
             })
+    },
+    getLastCheck(id) {
+        return Check
+            .findOne({
+                order:[
+                    ['id', 'ASC']
+                ],
+                where:{
+                    [Op.and]: [
+                      { child_id: id },
+                      { finished: 1 } 
+                    ]
+                  }
+            })        
+    },
+    getResultById(id){
+        return CheckResult
+            .findOne({
+                where: {
+                    check_id: id
+                }
+            })  
     }
 }
 

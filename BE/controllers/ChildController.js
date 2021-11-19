@@ -10,6 +10,11 @@ module.exports = {
         Service.getSons(req.params.id)
             .then((childrens) => {res.status(200).send(childrens)})
             .catch((error) => {res.status(200).send({error: error})}) 
+    },
+    addChild(req, res){
+        Service.addChild(req.body)
+            .then((child) => {res.status(200).send(child)})  
+            .catch((error) => {res.status(200).send({error: error})})          
     }
 
 }

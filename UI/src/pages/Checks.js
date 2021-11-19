@@ -65,7 +65,7 @@ export default function Checks () {
                         />
                     </Grid>
                     <Grid item xs={12} sm={12} md={12}>
-                        <Button variant="contained" size="large" onClick={NewCheckOpen}>
+                        <Button variant="contained" size="large" onClick={() => NewCheckOpen}>
                             Programar Nuevo Control
                         </Button>
                     </Grid>

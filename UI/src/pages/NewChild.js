@@ -1,13 +1,27 @@
 import { Card, CardHeader, CardContent, Container, CardActions, Button } from "@mui/material";
+import { useContext } from "react";
 import { useNavigate } from "react-router";
 import NewChildForm from "src/components/modals/forms/NewChildForm";
 import Page from "src/components/Page";
+import { DataContext } from "src/context";
+import { URLService } from "src/services/URLService";
 
 export default function NewChild (){
     const navigate = useNavigate();
+    const { currentUser, setCurrentUser } = useContext(DataContext);
+
+    const updateUser = async function() {
+        await fetch(URLService.getUserByIdURL + currentUser.id)
+            .then((response) => response.json())
+            .then((user) => { 
+                setCurrentUser(user);
+                navigate("/main/perfil", { replace: true } )
+            })
+            .catch((error) => { console.log(error) })
+    }
 
     const handleReturn = () => {
-        navigate("/main/perfil", { replace: true } )
+        updateUser();        
     }
 
     return(

@@ -5,8 +5,8 @@ import DatePickerWrapper from "../DatePickerWrapper";
 import TagsInput from "../TagsInput";
 
 export default function ChildCard({ child }) {   
-    const [allergies, setAllergies] = useState([]);
-    const [cronicDisease, setCronicDisease] = useState([]);
+    const [allergies, setAllergies] = useState(child.allergies.split(','));
+    const [cronicDisease, setCronicDisease] = useState(child.cronic_diseases.split(','));
 
     return (
         <>

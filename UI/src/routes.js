@@ -18,6 +18,7 @@ import Percentiles from './pages/Percentiles';
 import PrivateRoute from './components/authentication/PrivateRoute';
 import NewCheck from './pages/NewCheck';
 import NewChild from './pages/NewChild';
+import NewStudy from './pages/NewStudy';
 
 // ----------------------------------------------------------------------
 
@@ -35,7 +36,8 @@ export default function Router() {
         { path: 'percentiles/:id', element: <Percentiles /> },
         { path: 'controles/resultado/:id', element: <CheckResult /> },
         { path: 'controles/nuevo', element: <NewCheck /> },
-        { path: 'estudios/resultado/:id', element: <StudiesResult /> },        
+        { path: 'estudios/resultado/:id', element: <StudiesResult /> },
+        { path: 'estudios/nuevo', element: <NewStudy /> },      
         { path: 'perfil', element: <Profile /> },
         { path: 'agregarHijo', element: <NewChild /> },
         { path: '*', element: <Navigate to="/404" replace /> }

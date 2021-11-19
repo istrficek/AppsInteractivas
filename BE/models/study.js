@@ -16,6 +16,10 @@ module.exports = (sequelize, DataTypes) => {
         as: "child",
         foreignKey: "child_id",
       });
+      study.hasOne(models.study_result, {
+        as:'result',
+        foreignKey: 'study_id'
+      })
     }
   };
   study.init({
@@ -31,6 +35,7 @@ module.exports = (sequelize, DataTypes) => {
     date: DataTypes.DATE,
     address: DataTypes.STRING,
     doctor: DataTypes.STRING,
+    finished: DataTypes.BOOLEAN,
     description: DataTypes.STRING
   }, {
     sequelize,

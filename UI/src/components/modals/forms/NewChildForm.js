@@ -53,14 +53,24 @@ export default function NewChildForm({ onFinish }) {
 
   }
 
-  const setNewCheck = async function(newCheck){
-    await fetch(URLService.setNewCheck, {
+  const setNewChild = async function(newChild){
+    await fetch(URLService.setNewChildURL, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify(newCheck),
+        body: JSON.stringify(newChild),
       })
+      .then((result) => {
+        onFinish();
+      })
+      .catch((error) => console.log(error))
+  }
+
+  function onKeyDown(keyEvent) {
+    if ((keyEvent.charCode || keyEvent.keyCode) === 13) {
+      keyEvent.preventDefault();
+    }
   }
 
   const formik = useFormik({
@@ -77,14 +87,10 @@ export default function NewChildForm({ onFinish }) {
       let blood_type_id = bloodType
       let aller = allergies
       let cronic_diseases = cronicDisease
-      let picture = ''
-      let user_id = currentUser.id
+      let pic = picture
+      let user_id = currentUser.id      
 
-      console.log({name, last_name, dni, birthday, blood_type_id, aller, cronic_diseases, picture, user_id})
-
-    //   setNewCheck({address, doctor, date, child_id})
-
-    //   onFinish();
+      setNewChild({name, last_name, dni, birthday, blood_type_id, aller, cronic_diseases, pic, user_id})      
     }
   });
 
@@ -92,7 +98,7 @@ export default function NewChildForm({ onFinish }) {
 
   return (
     <FormikProvider value={formik}>
-      <Form autoComplete="off" noValidate onSubmit={handleSubmit}>
+      <Form autoComplete="off" noValidate onSubmit={handleSubmit} onKeyDown={onKeyDown}>
         <Stack spacing={3}>
         
         <Grid container justifyContent='center'>
@@ -132,7 +138,7 @@ export default function NewChildForm({ onFinish }) {
             helperText={touched.dni && errors.dni}
         />
 
-        <ComboBox value={bloodType} /> 
+        <ComboBox value={bloodType} valueChanged={(val) => { setBloodType(val) }} /> 
 
         <TagsInput
             selectedTags={(allergy) => { setAllergies(allergy) } }

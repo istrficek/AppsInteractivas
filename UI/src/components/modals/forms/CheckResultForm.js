@@ -12,7 +12,6 @@ import { URLService } from 'src/services/URLService';
 export default function CheckResultForm({ id, onFinish }) {
     const [showMeds, setShowMeds] = useState(false);
     const [showStudy, setShowStudy] = useState(false);
-    const { currentChildId } = useContext(DataContext);
 
   const LoginSchema = Yup.object().shape({
     weight: Yup.number().typeError('Ingrese el peso en kilogramos').min(1.0, 'El peso debe ser mayor a 1 Kg').required('Peso Requerido'),

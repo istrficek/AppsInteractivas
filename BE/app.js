@@ -7,17 +7,17 @@ const port = 3000;
 process.env.NODE_ENV = 'Development';
 
 // Creo todas las tablas en la base si no existen
-db.blood_type.sync();
-db.user.sync();
-db.child.sync();
-db.check.sync();
-db.check_result.sync();
-db.child_of.sync();
-db.child_request.sync();
-db.notification.sync();
-db.study.sync();
-db.study_result.sync();
-db.vaccine.sync();
+// db.blood_type.sync();
+// db.child.sync();
+// db.child_of.sync();
+// db.user.sync();
+// db.check.sync();
+// db.check_result.sync();
+// db.child_request.sync();
+// db.notification.sync();
+// db.study.sync();
+// db.study_result.sync();
+// db.vaccine.sync();
 
 // Middleware
 app.use(cors());

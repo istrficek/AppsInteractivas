@@ -22,5 +22,25 @@ module.exports = {
                 user_id: id,
                 },
             })
+    },
+    addChild(child) {
+        return Child.
+            create({
+                name: child.name,
+                last_name: child.last_name,
+                dni: child.dni,
+                birthday: child.birthday,
+                blood_type_id: child.blood_type_id,
+                allergies: child.aller.join(),
+                cronic_diseases: child.cronic_diseases.join(),
+                picture: child.pic
+            })
+            .then((newChild) => {
+                ChildOf.
+                    create({
+                        user_id: child.user_id,
+                        child_id: newChild.id
+                    })
+            })
     }
 }

@@ -55,7 +55,7 @@ export function fDateTimeDayMonth(date) {
 export function fDateTimeToLongText(date) {
   let d = new Date(date);
 
-  let text = d.getDate().toString().padStart(2,'0') + ' de ' + monthWord(d.getMonth()) + ' a las ' + d.getHours().toString().padStart(2,'0') + ':' + d.getMinutes().toString().padStart(2,'0');
+  let text = d.getDate().toString().padStart(2,'0') + ' de ' + monthWord(d.getMonth()+1) + ' a las ' + d.getHours().toString().padStart(2,'0') + ':' + d.getMinutes().toString().padStart(2,'0');
 
   return text;
 

@@ -50,4 +50,18 @@ module.exports = {
         })
         .catch((error) => res.status(400).send(error));
     },
+    get(req, res) {
+      return User
+        .findOne({
+          include: [{ all: true, nested: true }],
+          where: {
+            id: req.params.id
+          },
+        })
+        .then((user) => res.status(200).send(user))
+        .catch((error) => { 
+          console.log('Error getting user' + error);
+          res.status(200).send({error: 'Error obteniendo usuario'})   
+        })
+    }
   };

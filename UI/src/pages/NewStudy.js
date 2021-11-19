@@ -1,13 +1,12 @@
-import { Card, CardHeader, CardContent, Container, Box, Icon, CardActions, Button } from "@mui/material";
+import { Card, CardHeader, CardContent, Container, CardActions, Button } from "@mui/material";
 import { useContext } from "react";
-import { useNavigate, useParams } from "react-router";
-import StudyResultForm from "src/components/modals/forms/StudyResultForm";
+import { useNavigate } from "react-router";
+import NewStudyForm from "src/components/modals/forms/NewStudyForms";
 import Page from "src/components/Page";
 import { DataContext } from "src/context";
 
-export default function StudyResult (){
+export default function NewStudy (){
     const navigate = useNavigate();
-    let { id } = useParams();
     const { currentChildId } = useContext(DataContext);
 
     const handleReturn = () => {
@@ -15,15 +14,15 @@ export default function StudyResult (){
     }
 
     return(
-        <Page title="Resultado Estudio | Baby App">
+        <Page title="Nuevo Estudio | Baby App">
             <Container maxWidth="lg">                
                 <Card>
                     <CardActions>
                         <Button size='medium' onClick={handleReturn}>Volver</Button>
                     </CardActions>
-                    <CardHeader title="Subir Resultado de Control"></CardHeader>                
+                    <CardHeader title="Nuevo Turno Para Estudio"></CardHeader>                
                     <CardContent>
-                        <StudyResultForm id={id} onFinish={handleReturn} ></StudyResultForm>
+                        <NewStudyForm onFinish={handleReturn} ></NewStudyForm>
                     </CardContent>
                 </Card>
             </Container>

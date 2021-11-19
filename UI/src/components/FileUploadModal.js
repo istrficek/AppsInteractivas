@@ -5,6 +5,7 @@ import Modal from '@mui/material/Modal';
 import { Card, CardContent, CardHeader, CardMedia, Stack } from '@mui/material';
 import { makeStyles } from '@mui/styles'
 import { DataContext } from 'src/context';
+import { LoadingButton } from '@mui/lab';
 
 const styles = {
     inputFile: {
@@ -42,6 +43,7 @@ export default function FileUploadModal({ open, handleClose, selectedImage }) {
     const { currentUser } = React.useContext(DataContext);      
     const [image, setImage] = React.useState(undefined)
     const [imageURL, setImageURL] = React.useState(currentUser.picture);
+    const [loading, setLoading] = React.useState(false)
 
     React.useEffect(() => {
         if (image) {            
@@ -54,7 +56,8 @@ export default function FileUploadModal({ open, handleClose, selectedImage }) {
     }
 
     const handleUploadImage = () => {
-        selectedImage(image)
+        setLoading(true);
+        selectedImage(image);
     }
 
     const classes = useStyles();
@@ -94,7 +97,7 @@ export default function FileUploadModal({ open, handleClose, selectedImage }) {
                     />  
                     <Stack>
                         <Typography> { image? image.name : 'Subir Imagen' } </Typography>                                        
-                        <Button onClick={handleUploadImage} variant='outlined' >Cambiar Imagen</Button>
+                        <LoadingButton loading={loading} onClick={handleUploadImage} variant='outlined' >Cambiar Imagen</LoadingButton>
                     </Stack>
                 </div>
             </CardContent>

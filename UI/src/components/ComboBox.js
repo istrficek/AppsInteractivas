@@ -3,13 +3,14 @@ import { FormControl, InputLabel, MenuItem, Select } from "@mui/material";
 import { useContext, useEffect, useState } from "react";
 import { DataContext } from "src/context";
 
-export default function ComboBox({ value }) {
+export default function ComboBox({ value, valueChanged }) {
     const [val, setVal] = useState(value);
     const [elements, setElements] = useState([]);
     const { url } = useContext(DataContext);
 
     const handleChange = (e) => {
-        setVal(e.target.value);        
+        setVal(e.target.value);
+        valueChanged(e.target.value);
     }
 
     const getBloodTypes = () => {

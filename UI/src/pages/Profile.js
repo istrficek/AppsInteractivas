@@ -12,6 +12,12 @@ import { useNavigate } from "react-router";
 export default function Profile() {
     const { currentUser } = useContext(DataContext);
     const [ openModal, setOpenModal ] = useState(false);
+    const [ name, setName ] = useState(currentUser.name);
+    const [ lastName, setLastname ] = useState(currentUser.last_name);
+    const [ dni, setDNI ] = useState(currentUser.dni);
+    const [ mail, setMail ] = useState(currentUser.mail);
+    const [ phone, setPhone ] = useState(currentUser.phone);
+    const [ address, setAddress ] = useState(currentUser.address);
     const navigate = useNavigate();
 
     const handleSelectedImage = async function(img) {
@@ -59,6 +65,7 @@ export default function Profile() {
                                             autoComplete="name"
                                             type="text"
                                             label="Nombre"
+                                            value={name}
                                         />
                                         
                                         <TextField 
@@ -66,13 +73,7 @@ export default function Profile() {
                                             autoComplete="lastName"
                                             type="text"
                                             label="Apellido"
-                                        />
-
-                                        <TextField 
-                                            fullWidth
-                                            autoComplete="gender"
-                                            type="text"
-                                            label="Sexo"
+                                            value={lastName}
                                         />
                                         
                                         <TextField 
@@ -80,6 +81,8 @@ export default function Profile() {
                                             autoComplete="dni"
                                             type="text"
                                             label="DNI"
+                                            value={dni}
+                                            disabled
                                         />                                                                                
                                     </Stack>
                                 </CardContent>
@@ -95,6 +98,8 @@ export default function Profile() {
                                             autoComplete="mail"
                                             type="text"
                                             label="Mail"
+                                            value={mail}
+                                            disabled
                                         />
 
                                         <TextField 
@@ -102,6 +107,7 @@ export default function Profile() {
                                             autoComplete="phone"
                                             type="text"
                                             label="Celular"
+                                            value={phone}
                                         />
                                         
                                         <TextField 
@@ -109,6 +115,7 @@ export default function Profile() {
                                             autoComplete="address"
                                             type="text"
                                             label="Dirección"
+                                            value={address}
                                         />                                    
                                     </Stack>
                                 </CardContent>

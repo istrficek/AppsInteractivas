@@ -1,4 +1,4 @@
-const baseURL = 'http://192.168.0.14:3000'
+const baseURL = 'https://babyappbe.azurewebsites.net'
 
 export const URLService = {
     uploadImageURL: baseURL + "/api/file/upload",

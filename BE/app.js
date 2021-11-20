@@ -18,8 +18,8 @@ process.env.NODE_ENV = 'Development';
 // db.study.sync();
 // db.study_result.sync();
 // db.vaccine.sync();
-//db.vaccine_calendar.sync();
-//db.password_reset.sync();
+// db.vaccine_calendar.sync();
+// db.password_reset.sync();
 
 // Middleware
 app.use(cors());

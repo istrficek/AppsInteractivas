@@ -1,0 +1,4 @@
+{
+    "appService.defaultWebAppToDeploy": "/subscriptions/73a28d56-3371-4d09-b872-9d1220359634/resourceGroups/SIP1/providers/Microsoft.Web/sites/BabyAppBE",
+    "appService.deploySubpath": "."
+}

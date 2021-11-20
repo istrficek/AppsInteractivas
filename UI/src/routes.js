@@ -20,6 +20,7 @@ import NewCheck from './pages/NewCheck';
 import NewChild from './pages/NewChild';
 import NewStudy from './pages/NewStudy';
 import NewVaccine from './pages/NewVaccine';
+import PasswordReset from './pages/PasswordReset';
 
 // ----------------------------------------------------------------------
 
@@ -51,6 +52,7 @@ export default function Router() {
       children: [
         { path: '/', element: <Landing/> },
         { path: 'login', element: <Login /> },
+        { path: 'reset', element: <PasswordReset /> },
         { path: 'register', element: <Register /> },
         { path: '404', element: <NotFound /> },
         { path: '/', element: <Navigate to="/dashboard" /> },

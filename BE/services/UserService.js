@@ -14,5 +14,14 @@ module.exports = {
           dni: dni
         }
       })
+    },
+    getByEmail(mail){
+      return User
+        .findOne({
+          include: [{ all: true, nested: true }],
+          where: {
+            id: mail
+          },
+        })
     }
 }

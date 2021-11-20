@@ -8,6 +8,7 @@ import { useNavigate } from 'react-router-dom';
 // material
 import { Stack, TextField, IconButton, InputAdornment } from '@mui/material';
 import { LoadingButton } from '@mui/lab';
+import { URLService } from 'src/services/URLService';
 
 // ----------------------------------------------------------------------
 
@@ -49,7 +50,7 @@ export default function RegisterForm() {
         password: getFieldProps('password').value,
         picture: '/static/mock-images/avatars/avatar_1.jpg'
       }
-      fetch("http://localhost:3000/api/users/register", {
+      fetch(URLService.registerURL, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

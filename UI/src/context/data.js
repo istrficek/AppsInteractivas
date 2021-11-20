@@ -5,7 +5,6 @@ export const DataContext = createContext({});
 export function DataProvider(props) {
     const [currentUser, setCurrentUser] = useState({});
     const [ token, setToken ] = useState('');
-    const [url, setUrl] = useState("http://127.0.0.1:3000");
     const [currentChildId, setCurrentChildId] = useState('');
 
     return (
@@ -15,7 +14,6 @@ export function DataProvider(props) {
             setCurrentUser,
             token,
             setToken,
-            url,
             currentChildId,
             setCurrentChildId
         }}>

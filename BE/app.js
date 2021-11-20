@@ -3,7 +3,7 @@ const bodyParser = require('body-parser');
 const cors = require("cors");
 const db = require('./models')
 const app = express();
-const port = 3000;
+const port = process.env.PORT || 3000;
 process.env.NODE_ENV = 'Development';
 
 // Creo todas las tablas en la base si no existen
@@ -19,6 +19,7 @@ process.env.NODE_ENV = 'Development';
 // db.study_result.sync();
 // db.vaccine.sync();
 //db.vaccine_calendar.sync();
+//db.password_reset.sync();
 
 // Middleware
 app.use(cors());

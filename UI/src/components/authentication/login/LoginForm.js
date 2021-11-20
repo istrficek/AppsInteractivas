@@ -19,6 +19,7 @@ import {
 } from '@mui/material';
 import { LoadingButton } from '@mui/lab';
 import { withSnackbar } from 'src/components/snack/CustomSnack';
+import { URLService } from 'src/services/URLService';
 
 // ----------------------------------------------------------------------
 
@@ -26,7 +27,7 @@ function LoginForm({ snackbarShowMessage }) {
   const navigate = useNavigate();
   const [showPassword, setShowPassword] = useState(false);
   const [ isSubmitting, setIsSubmitting ] = useState(false);
-  const { setCurrentUser, url, setToken } = useContext(DataContext);
+  const { setCurrentUser, setToken } = useContext(DataContext);
 
   const LoginSchema = Yup.object().shape({
     email: Yup.string().email('El email tiene que ser válido').required('Email requerido'),
@@ -45,7 +46,7 @@ function LoginForm({ snackbarShowMessage }) {
         mail: getFieldProps('email').value,
         password: getFieldProps('password').value
       }
-      fetch( url + "/api/users/login", {
+      fetch(URLService.loginURL, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -124,7 +125,7 @@ function LoginForm({ snackbarShowMessage }) {
               label="Recordar"
             />
 
-            <Link component={RouterLink} variant="subtitle2" to="#">
+            <Link component={RouterLink} variant="subtitle2" to="/reset">
               Te olvidaste la contraseña?
             </Link>
           </Stack>

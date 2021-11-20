@@ -1,12 +1,11 @@
 import React from "react";
 import { FormControl, InputLabel, MenuItem, Select } from "@mui/material";
-import { useContext, useEffect, useState } from "react";
-import { DataContext } from "src/context";
+import { useEffect, useState } from "react";
+import { URLService } from "src/services/URLService";
 
 export default function ComboBox({ value, valueChanged }) {
     const [val, setVal] = useState(value);
     const [elements, setElements] = useState([]);
-    const { url } = useContext(DataContext);
 
     const handleChange = (e) => {
         setVal(e.target.value);
@@ -14,7 +13,7 @@ export default function ComboBox({ value, valueChanged }) {
     }
 
     const getBloodTypes = () => {
-        fetch(url + '/api/blood-type/get')
+        fetch(URLService.getBloodTypeURL)
             .then((response) => response.json())
             .then((data) => {
                 setElements(data);

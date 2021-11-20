@@ -1,4 +1,4 @@
-const baseURL = 'http://127.0.0.1:3000'
+const baseURL = 'http://192.168.0.14:3000'
 
 export const URLService = {
     uploadImageURL: baseURL + "/api/file/upload",
@@ -22,4 +22,7 @@ export const URLService = {
     getVaccineRecommendationsURL: baseURL + '/api/vaccine/recommendations/',
     getPercentilesURL: baseURL + '/api/percentile/get/',
     getUserByDNIURL: baseURL + '/api/users/getByDNI/',
+    registerURL: baseURL + '/api/users/register',
+    loginURL: baseURL + '/api/users/login',
+    getBloodTypeURL: baseURL + '/api/blood-type/get'
 }

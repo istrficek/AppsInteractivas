@@ -12,11 +12,11 @@ export default function DatePickerWrapper({ label, errorMsg, valueCallBack, star
 
   const updateValueToParent = (value) => {
       setValue(value)
-      if(new Date(value) < new Date()){
-        setError(true);
-      } else{
-        setError(false);
-      }
+      // if(new Date(value) < new Date()){
+      //   setError(true);
+      // } else{
+      //   setError(false);
+      // }
       valueCallBack(value);
   }
 

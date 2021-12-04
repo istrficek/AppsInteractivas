@@ -25,12 +25,7 @@ CREATE TABLE IF NOT EXISTS `apps`.`blood_type` (
   `description` VARCHAR(255) NULL DEFAULT NULL,
   `createdAt` DATETIME NOT NULL,
   `updatedAt` DATETIME NOT NULL,
-  PRIMARY KEY (`id`))
-ENGINE = InnoDB
-AUTO_INCREMENT = 9
-DEFAULT CHARACTER SET = utf8mb4
-COLLATE = utf8mb4_0900_ai_ci;
-
+  PRIMARY KEY (`id`));
 
 -- -----------------------------------------------------
 -- Table `apps`.`child`
@@ -48,18 +43,11 @@ CREATE TABLE IF NOT EXISTS `apps`.`child` (
   `createdAt` DATETIME NOT NULL,
   `updatedAt` DATETIME NOT NULL,
   PRIMARY KEY (`id`),
-  INDEX `blood_type_id` (`blood_type_id` ASC) VISIBLE,
-  CONSTRAINT `child_ibfk_1`
+  
+  CONSTRAINT `child_blood_type`
     FOREIGN KEY (`id`)
     REFERENCES `apps`.`blood_type` (`id`)
-    ON UPDATE CASCADE,
-  CONSTRAINT `child_ibfk_2`
-    FOREIGN KEY (`blood_type_id`)
-    REFERENCES `apps`.`blood_type` (`id`))
-ENGINE = InnoDB
-AUTO_INCREMENT = 6
-DEFAULT CHARACTER SET = utf8mb4
-COLLATE = utf8mb4_0900_ai_ci;
+    ON UPDATE CASCADE);
 
 
 -- -----------------------------------------------------
@@ -76,14 +64,10 @@ CREATE TABLE IF NOT EXISTS `apps`.`check` (
   `updatedAt` DATETIME NOT NULL,
   PRIMARY KEY (`id`),
   INDEX `child_id` (`child_id` ASC) VISIBLE,
-  CONSTRAINT `check_ibfk_1`
+  CONSTRAINT `check_child`
     FOREIGN KEY (`child_id`)
     REFERENCES `apps`.`child` (`id`)
-    ON UPDATE CASCADE)
-ENGINE = InnoDB
-AUTO_INCREMENT = 8
-DEFAULT CHARACTER SET = utf8mb4
-COLLATE = utf8mb4_0900_ai_ci;
+    ON UPDATE CASCADE);
 
 
 -- -----------------------------------------------------
@@ -104,15 +88,11 @@ CREATE TABLE IF NOT EXISTS `apps`.`check_result` (
   `updatedAt` DATETIME NOT NULL,
   PRIMARY KEY (`id`),
   INDEX `check_id` (`check_id` ASC) VISIBLE,
-  CONSTRAINT `check_result_ibfk_1`
+  CONSTRAINT `check_result_check`
     FOREIGN KEY (`check_id`)
     REFERENCES `apps`.`check` (`id`)
     ON DELETE CASCADE
-    ON UPDATE CASCADE)
-ENGINE = InnoDB
-AUTO_INCREMENT = 4
-DEFAULT CHARACTER SET = utf8mb4
-COLLATE = utf8mb4_0900_ai_ci;
+    ON UPDATE CASCADE);
 
 
 -- -----------------------------------------------------
@@ -131,11 +111,7 @@ CREATE TABLE IF NOT EXISTS `apps`.`user` (
   `picture` VARCHAR(255) NULL DEFAULT NULL,
   `createdAt` DATETIME NOT NULL,
   `updatedAt` DATETIME NOT NULL,
-  PRIMARY KEY (`id`))
-ENGINE = InnoDB
-AUTO_INCREMENT = 5
-DEFAULT CHARACTER SET = utf8mb4
-COLLATE = utf8mb4_0900_ai_ci;
+  PRIMARY KEY (`id`));
 
 
 -- -----------------------------------------------------
@@ -150,18 +126,14 @@ CREATE TABLE IF NOT EXISTS `apps`.`child_of` (
   PRIMARY KEY (`id`),
   INDEX `user_id` (`user_id` ASC) VISIBLE,
   INDEX `child_id` (`child_id` ASC) VISIBLE,
-  CONSTRAINT `child_of_ibfk_1`
+  CONSTRAINT `child_of_user`
     FOREIGN KEY (`user_id`)
     REFERENCES `apps`.`user` (`id`)
     ON DELETE CASCADE
     ON UPDATE CASCADE,
-  CONSTRAINT `child_of_ibfk_2`
+  CONSTRAINT `child_of_child`
     FOREIGN KEY (`child_id`)
-    REFERENCES `apps`.`child` (`id`))
-ENGINE = InnoDB
-AUTO_INCREMENT = 6
-DEFAULT CHARACTER SET = utf8mb4
-COLLATE = utf8mb4_0900_ai_ci;
+    REFERENCES `apps`.`child` (`id`));
 
 
 -- -----------------------------------------------------
@@ -183,10 +155,7 @@ CREATE TABLE IF NOT EXISTS `apps`.`child_request` (
     REFERENCES `apps`.`user` (`id`),
   CONSTRAINT `child_request_ibfk_2`
     FOREIGN KEY (`new_user_id`)
-    REFERENCES `apps`.`user` (`id`))
-ENGINE = InnoDB
-DEFAULT CHARACTER SET = utf8mb4
-COLLATE = utf8mb4_0900_ai_ci;
+    REFERENCES `apps`.`user` (`id`));
 
 
 -- -----------------------------------------------------
@@ -204,12 +173,9 @@ CREATE TABLE IF NOT EXISTS `apps`.`notification` (
   `updatedAt` DATETIME NOT NULL,
   PRIMARY KEY (`id`),
   INDEX `user_id` (`user_id` ASC) VISIBLE,
-  CONSTRAINT `notification_ibfk_1`
+  CONSTRAINT `notification_user`
     FOREIGN KEY (`user_id`)
-    REFERENCES `apps`.`user` (`id`))
-ENGINE = InnoDB
-DEFAULT CHARACTER SET = utf8mb4
-COLLATE = utf8mb4_0900_ai_ci;
+    REFERENCES `apps`.`user` (`id`));
 
 
 -- -----------------------------------------------------
@@ -222,10 +188,7 @@ CREATE TABLE IF NOT EXISTS `apps`.`password_reset` (
   `finished` TINYINT(1) NULL DEFAULT NULL,
   `createdAt` DATETIME NOT NULL,
   `updatedAt` DATETIME NOT NULL,
-  PRIMARY KEY (`id`))
-ENGINE = InnoDB
-DEFAULT CHARACTER SET = utf8mb4
-COLLATE = utf8mb4_0900_ai_ci;
+  PRIMARY KEY (`id`));
 
 
 -- -----------------------------------------------------
@@ -243,14 +206,10 @@ CREATE TABLE IF NOT EXISTS `apps`.`study` (
   `updatedAt` DATETIME NOT NULL,
   PRIMARY KEY (`id`),
   INDEX `child_id` (`child_id` ASC) VISIBLE,
-  CONSTRAINT `study_ibfk_1`
+  CONSTRAINT `study_child`
     FOREIGN KEY (`child_id`)
     REFERENCES `apps`.`child` (`id`)
-    ON UPDATE CASCADE)
-ENGINE = InnoDB
-AUTO_INCREMENT = 9
-DEFAULT CHARACTER SET = utf8mb4
-COLLATE = utf8mb4_0900_ai_ci;
+    ON UPDATE CASCADE);
 
 
 -- -----------------------------------------------------
@@ -265,13 +224,9 @@ CREATE TABLE IF NOT EXISTS `apps`.`study_result` (
   `updatedAt` DATETIME NOT NULL,
   PRIMARY KEY (`id`),
   INDEX `study_id` (`study_id` ASC) VISIBLE,
-  CONSTRAINT `study_result_ibfk_1`
+  CONSTRAINT `study_result_study`
     FOREIGN KEY (`study_id`)
-    REFERENCES `apps`.`study` (`id`))
-ENGINE = InnoDB
-AUTO_INCREMENT = 9
-DEFAULT CHARACTER SET = utf8mb4
-COLLATE = utf8mb4_0900_ai_ci;
+    REFERENCES `apps`.`study` (`id`));
 
 
 -- -----------------------------------------------------
@@ -290,14 +245,10 @@ CREATE TABLE IF NOT EXISTS `apps`.`vaccine` (
   `updatedAt` DATETIME NOT NULL,
   PRIMARY KEY (`id`),
   INDEX `child_id` (`child_id` ASC) VISIBLE,
-  CONSTRAINT `vaccine_ibfk_1`
+  CONSTRAINT `vaccine_child`
     FOREIGN KEY (`child_id`)
     REFERENCES `apps`.`child` (`id`)
-    ON UPDATE CASCADE)
-ENGINE = InnoDB
-AUTO_INCREMENT = 4
-DEFAULT CHARACTER SET = utf8mb4
-COLLATE = utf8mb4_0900_ai_ci;
+    ON UPDATE CASCADE);
 
 
 -- -----------------------------------------------------
@@ -311,11 +262,7 @@ CREATE TABLE IF NOT EXISTS `apps`.`vaccine_calendar` (
   `months_max` INT NULL DEFAULT NULL,
   `createdAt` DATETIME NOT NULL,
   `updatedAt` DATETIME NOT NULL,
-  PRIMARY KEY (`id`))
-ENGINE = InnoDB
-AUTO_INCREMENT = 22
-DEFAULT CHARACTER SET = utf8mb4
-COLLATE = utf8mb4_0900_ai_ci;
+  PRIMARY KEY (`id`));
 
 
 SET SQL_MODE=@OLD_SQL_MODE;

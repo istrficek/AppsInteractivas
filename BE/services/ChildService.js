@@ -48,5 +48,8 @@ module.exports = {
                         child_id: newChild.id
                     })
             })
+            .catch((error) => {
+                console.log(error)
+            })
     }
 }

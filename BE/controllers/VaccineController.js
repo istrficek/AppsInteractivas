@@ -65,5 +65,32 @@ module.exports = {
                     })
             })
         
+    },
+    getVaccineList(req, res) {
+        VaccineService.getGivenVaccineList(req.params.id)
+            .then((vaccineList) => {
+                VaccineService.getVaccineList()
+                    .then((completeList) => {
+                        let completedVaccine = [];
+                        let notCompletedVaccine = [];                    
+                        completeList.forEach(vaccine => {
+                            let found = false;
+                            vaccineList.forEach((v) => {
+                                if(v.description === vaccine.vaccine && v.dosis === vaccine.dosis) {
+                                    found = true;
+                                    completedVaccine.push(vaccine);
+                                }
+                            })
+                            if(!found) {
+                                notCompletedVaccine.push(vaccine);
+                            }                            
+                        });
+                        res.status(200).send({given: completedVaccine, pending: notCompletedVaccine})
+                    })                
+            })
+            .catch((error) => {
+                console.log(error)
+                        res.status(200).send({error: 'Error Getting Vaccine List ' + error})
+            })
     }
 }

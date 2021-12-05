@@ -8,5 +8,6 @@ router.get('/getHistory/:id', VaccineController.getVaccineHistory);
 router.get('/result/:id', VaccineController.setVaccineResult);
 router.post('/new', VaccineController.setNewVaccine);
 router.get('/recommendations/:id', VaccineController.getRecomendations);
+router.get('/vaccineList/:id', VaccineController.getVaccineList);
 
 module.exports = router;

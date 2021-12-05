@@ -24,5 +24,6 @@ export const URLService = {
     getUserByDNIURL: baseURL + '/api/users/getByDNI/',
     registerURL: baseURL + '/api/users/register',
     loginURL: baseURL + '/api/users/login',
-    getBloodTypeURL: baseURL + '/api/blood-type/get'
+    getBloodTypeURL: baseURL + '/api/blood-type/get',
+    getVaccinesURL: baseURL + '/api/vaccine/vaccineList/'
 }

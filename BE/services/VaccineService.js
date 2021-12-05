@@ -62,6 +62,17 @@ module.exports = {
                     ]
                   },
             })
+    },
+    getGivenVaccineList(id) {
+        return Vaccine
+            .findAll({ 
+                where: { child_id: id },
+                attributes: ['description', 'dosis'] 
+            })
+    },
+    getVaccineList() {
+        return VaccineCalendar
+            .findAll({ attributes: ['vaccine', 'dosis'] })
     }
 }
 

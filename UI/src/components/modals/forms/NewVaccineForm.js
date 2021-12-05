@@ -10,18 +10,18 @@ import DateTimePickerWrapper from 'src/components/DateTimePickerWrapper';
 import { useContext, useState } from 'react';
 import { URLService } from 'src/services/URLService';
 import { DataContext } from 'src/context';
+import VaccineSelect from 'src/components/VaccineSelect';
 
 // ----------------------------------------------------------------------
 
 export default function NewVaccineForm({ onFinish }) {
   const [newDate, setNewDate] = useState(new Date())
+  const [selectedVaccine, setSelectedVaccine] = useState({});
   const { currentChildId } = useContext(DataContext);
 
   const LoginSchema = Yup.object().shape({    
     address: Yup.string().required('Dirección Requerida'),
     doctor: Yup.string().required('Pediatra Requerido'),
-    description: Yup.string().required('Nombre de la Vacuna Requerida'),
-    dosis: Yup.string().required('Dósis de la vacuna requerida'),
   });
 
   const dateTimeCallback = (date) => {
@@ -38,6 +38,10 @@ export default function NewVaccineForm({ onFinish }) {
       })
   }
 
+  const vaccineValueHandler = function(vac) {
+    setSelectedVaccine(vac);
+  } 
+
   const formik = useFormik({
     initialValues: {
       email: '',
@@ -47,10 +51,10 @@ export default function NewVaccineForm({ onFinish }) {
     onSubmit: () => {
       let address = getFieldProps('address').value
       let doctor = getFieldProps('doctor').value
-      let description = getFieldProps('description').value
-      let dosis = getFieldProps('dosis').value
-      let date = newDate      
-      let child_id = currentChildId
+      let description = selectedVaccine.vaccine;
+      let dosis = selectedVaccine.dosis;
+      let date = newDate;
+      let child_id = currentChildId;
 
       setNewVaccine({address, doctor, date, child_id, description, dosis})
 
@@ -84,23 +88,7 @@ export default function NewVaccineForm({ onFinish }) {
             helperText={touched.doctor && errors.doctor}
           />
 
-          <TextField
-            fullWidth
-            type="text"
-            label="Descripción"
-            {...getFieldProps('description')}          
-            error={Boolean(touched.description && errors.description)}
-            helperText={touched.description && errors.description}
-          />
-
-          <TextField
-            fullWidth
-            type="text"
-            label="Dósis"
-            {...getFieldProps('dosis')}          
-            error={Boolean(touched.dosis && errors.dosis)}
-            helperText={touched.dosis && errors.dosis}
-          />
+          <VaccineSelect valueChanged={(vac) => vaccineValueHandler(vac)}/>      
 
           <LoadingButton
             fullWidth
